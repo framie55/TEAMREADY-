@@ -42,3 +42,13 @@ Nothing above was fixed in this session. Next planned stage: a full prioritised 
 - **Scope intentionally limited:** ~14 other functions have the same dead-Twilio dependency (availability chases, matchday reminders, chairman digest, MOTM SMS, other LMS broadcasts) — not touched yet, logged as Known Issues row 21, pending the manager's decision on a replacement channel.
 - **Tested:** `npm run build` verified clean after the change (exit 0, no new errors). No test suite exists to run (see Known Issues row 6). Not live-invoked against production to avoid an out-of-schedule side effect; verified by code review and dry-run diff instead.
 - **Checkpoints:** `6a9e8a34cd6c82d0ee2d54f4` = state immediately before this fix (restore to this to undo). `6a9eba00704d546ece83d190` (git commit `ca87ccc58d19d1268086119ad0665438e2b9abe6`) = state immediately after this fix, taken as the rollback point.
+
+## 2026-09-09 (continued) — Explained the LMS integrity alert; confirmed a delete-tooling limitation
+
+**Investigated Known Issues #2, #4, #5 fully, at the club manager's request:**
+
+- The "20 paid entries, 21 picks submitted" alert is fully explained: the extra pick belongs to a phantom `LmsEntry` (`6a988c49fe9ec8f718e9c0c3`) created against the archived duplicate "Paul Griffith" record. Verified via direct query: no `Payment` record exists for it (the fee was never actually collected, only ever an expected-amount field), `joined_at`/`terms_accepted_at` were never set, and its `LmsPick` record was manually set to `team_picked: "VOID — invalid entry"` by the manager on 2026-09-03, the same day they spotted and eliminated it. No real entrant, no money ever at risk. Marked Resolved.
+- The manager approved deleting the empty James Dickinson duplicate (`6a9d2f18586e6e627cf46f91`, confirmed zero references anywhere). **Not yet deleted** — the maintenance agent's toolset only supports create/update/query on entity records, not delete (the platform itself supports deletion via `entities.X.delete(id)`, confirmed by grepping the app's own code, but only from inside the running app or a real function, not from a generic tool available here). Manual deletion via Squad in the app was recommended instead of building a one-off workaround for a single empty, harmless record.
+- The "Paul Griffith" player record (`...fe3c`) was deliberately left alone: it's still referenced by the (already-voided, harmless) `LmsEntry`/`LmsPick` pair above, so deleting the player now would only create orphaned references. Recommendation stands: leave archived unless the manager wants all three records removed together as one deliberate operation.
+
+**No data was changed in this entry** — investigation and documentation only.

@@ -60,6 +60,14 @@ Every correction Paul has given overrides an earlier assumption, generated answe
 
 **Database records created:** four new `Sponsor` records — UCS Renewables (`6a9f3299075e24e0b122223b`), DKJ Joinery (`6a9f3299075e24e0b122223c`), David Graham Roofing (`6a9f3299075e24e0b122223d`), SafeSwitch Solutions (`6a9f3299075e24e0b122223e`) — all with `logo_url: null`, `website_url: null` pending Paul supplying/uploading them.
 
+## 2026-09-07 (continued) — Patched the live public/supporter Player data exposure
+
+**Instruction (Paul):** "Ok" — approved proceeding on the security patch (and separately, to hold off inferring approval for the full new-pages build from the same one-word reply — that was Claude's own judgement call, flagged back to Paul rather than assumed).
+**Fix:** created `getPublicPlayerData` backend function (same safe-aggregator pattern as the existing `getGuestDashboardData`), explicitly whitelisting only public-safe `Player` fields (name, nickname, position, shirt number, photo, season stats). Replaced the direct `base44.entities.Player.filter(...)` call in all 5 affected pages (`PublicSquad.jsx`, `SupporterSquad.jsx`, `SupporterStats.jsx`, `SupporterMatchCentre.jsx`, `SupporterHome.jsx`) with a call to this function.
+**Verified:** `npm run build` clean; targeted `eslint` on all 6 changed files clean except pre-existing, unrelated unused-import errors already documented in Known Issues #18.
+**Effect:** Known Issues #31 (new row, Fixed). Known Issues #3 (no row-level security anywhere in the app) remains open — this fix closes the specific live exposure, not the underlying structural gap.
+**Database records affected:** none — code-only change.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

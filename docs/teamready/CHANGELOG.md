@@ -83,3 +83,12 @@ Paul supplied real brand assets: Amber's Legacy, GKB Financial Planning, SafeSwi
 **Database change:** created four new `Sponsor` records — UCS Renewables (type `kit`, priority `main`), DKJ Joinery (`pitch`), David Graham Roofing (`pitch`), SafeSwitch Solutions (`general`) — `logo_url`/`website_url` left null pending Paul supplying websites and uploading logos via the app's own Sponsor admin screen (no image-upload tool available to Claude). Caught and corrected my own mistake before writing: an early sponsorship-category question conflated the `sponsorship_type` field with the separate `priority` field — re-asked correctly before any write.
 
 **Tested:** data-entry only, no code changed — verified via `query_entities` read-back that all four records were created correctly.
+
+## 2026-09-07 (continued) — Fixed the live public/supporter Player data exposure
+
+Paul approved the fix flagged in the Phase 1 report. Created `base44/functions/getPublicPlayerData/entry.ts` — a new backend function following the same safe-aggregator pattern as the existing `getGuestDashboardData`, explicitly whitelisting only public-safe `Player` fields (`full_name`, `nickname`, `position`, `shirt_number`, `photo_url`, `previous_club`, season stats) and never touching `login_pin`, `otp_code`, `invite_token`, `phone`, `email`, `date_of_birth`, or emergency contacts.
+
+**Code changes:** replaced the direct `base44.entities.Player.filter({active:true, archived:false})` call with `base44.functions.invoke('getPublicPlayerData', {})` in all 5 affected pages: `src/pages/public/PublicSquad.jsx`, `src/pages/supporter/SupporterSquad.jsx`, `src/pages/supporter/SupporterStats.jsx`, `src/pages/supporter/SupporterMatchCentre.jsx`, `src/pages/public/SupporterHome.jsx`.
+**Tested:** `npm run build` clean; targeted `eslint` on all 6 changed files — only pre-existing, unrelated unused-import errors present (already documented in Known Issues #18), nothing new introduced.
+**Checkpoints:** `6a9f346b7548fad476affefe` (before) → `6a9f35ec4dd8fe09cdbc6ac1` / commit `93585d57d7055c0ebe798d7a25224d27399ecd04` (after).
+**Still open:** Known Issues #3 — no row-level security anywhere in the app. This fix closes the specific live exposure on these 5 pages; the same direct-entity-read pattern should be checked for other sensitive entities (e.g. `Sponsor`, `ClubNews`) before any further public-website build work.

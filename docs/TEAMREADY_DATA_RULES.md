@@ -12,14 +12,14 @@ _These rules are non-negotiable. Read this before touching any player, statistic
 - **There are two totally different people both called Paul Griffiths — a goalkeeper and an outfield player.** The club calls the outfield player **"Griffo"** specifically to keep them apart. Confirmed mapping, verified 2026-09-07: `Paul Griffiths (Griffo)` = outfield/forward, id `6a362b0234d01f9e9562092b`, nickname `Griffo`. `Paul Griffiths (GK)` = goalkeeper, id `6a4de9c6ff18cb10446b5d26`, nickname `Griff`. These must remain two separate verified records, never merged.
 - **Craig Smith must never be changed to or confused with Paul Smith.**
 
-## What Phase 1 inspection found in the live data (reported, not fixed)
+## What Phase 1 inspection found in the live data (investigated 2026-09-07/09 — resolved, no action needed)
 
-- `Player` has **no uniqueness constraint** on name or nickname, and **no verification/status flag** beyond `active`/`archived`. Disambiguation between the two Paul Griffiths is currently done by hand — appending "(GK)" / "(Griffo)" into the `full_name` text field — not by any structured field.
-- A **duplicate record for James Dickinson** exists: one archived, one active (the active one correctly carries the "Jiffy" nickname).
-- A **third, unexplained "Paul Griffith" record** (note: singular, likely a typo) exists alongside the two legitimate Paul Griffiths, marked archived.
+- `Player` has **no uniqueness constraint** on name or nickname, and **no verification/status flag** beyond `active`/`archived`. Disambiguation between the two Paul Griffiths is currently done by hand — appending "(GK)" / "(Griffo)" into the `full_name` text field — not by any structured field. (This structural gap remains open — see Known Issues #10 — but it has not caused any live problem.)
+- The duplicate James Dickinson record (id `6a9d2f18586e6e627cf46f91`) was investigated: it's completely empty (zero stats, no contact details) and was archived the same day it was created — a harmless same-day mis-click, already self-corrected. No data was at risk.
+- The extra "Paul Griffith" record (id `6a6e2dee326d3a4cb774fe3c`) was investigated: its own notes field already documents it as "duplicate of Paul Griffiths (Griffo)," archived back in August by an admin who caught it correctly at the time. No data was at risk.
 - No record for "Paul Smith" currently exists, so no conflation with Craig Smith has happened — but nothing in the system would stop it happening in future without a manual check.
 
-**None of the above has been changed.** Any fix requires the manager to confirm which record is correct before anything is merged, archived, or edited.
+**Both stray records above have been left untouched** (still archived, as they already were) pending the manager's call on whether to delete them outright — a cosmetic decision only, not an urgent one.
 
 ## Structural rules to follow when working with this data
 

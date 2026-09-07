@@ -73,3 +73,13 @@ Paul sent a screenshot of the FA's official registered squad list. Cross-checked
 - **Reopened, needs Paul's confirmation:** the archived "Paul Griffith" (singular) record was previously assumed a duplicate of Griffo, but the FA's own list shows "Paul Griffith" and "Paul Griffiths" as two *separately* registered names — this may be a real third person, not a duplicate. Known Issues #5 reopened, nothing changed on this record pending confirmation.
 
 **Database records affected:** `Player` `6a362b0234d01f9e95620923` (name), `Player` `6a38ca0a21cb430084f8f8b7` (name), `Player` `6a9d2f18586e6e627cf46f93` (archived), `Player` `6a38ca0a21cb430084f8f8b6` (name + injured flag). All changes backed by an authoritative source (the FA's own registered list, or Paul's direct confirmation) — nothing guessed.
+
+## 2026-09-07 — Public website Phase 1 report delivered; four new sponsor records created; badge/founding-year confirmed
+
+Delivered the Phase 1 assessment Paul required before any public-website build work. Headline finding: the existing `/public/*` and `/supporter/*` pages are already live with zero login, and several fetch the full `Player` record client-side with no field whitelisting — since no entity has row-level security, private fields (login PIN, OTP, invite token, phone, email, DOB, emergency contacts) are exposed in the browser today. Flagged as a blocker per Paul's own stated condition; awaiting his go-ahead to patch and to confirm the "extend existing pages, don't duplicate" approach. No code changed yet on this.
+
+Paul supplied real brand assets: Amber's Legacy, GKB Financial Planning, SafeSwitch Solutions, UCS Renewables, David Graham Roofing, DKJ Joinery logos, and the club badge. Confirmed via Paul: club badge name is "Grindon Board Inn" (not "Broadway") and founding year is definitively 1995 — a kit mockup showing "Grindon Broadway ... EST 2021" was wrong and is not to be used. Known Issues #30.
+
+**Database change:** created four new `Sponsor` records — UCS Renewables (type `kit`, priority `main`), DKJ Joinery (`pitch`), David Graham Roofing (`pitch`), SafeSwitch Solutions (`general`) — `logo_url`/`website_url` left null pending Paul supplying websites and uploading logos via the app's own Sponsor admin screen (no image-upload tool available to Claude). Caught and corrected my own mistake before writing: an early sponsorship-category question conflated the `sponsorship_type` field with the separate `priority` field — re-asked correctly before any write.
+
+**Tested:** data-entry only, no code changed — verified via `query_entities` read-back that all four records were created correctly.

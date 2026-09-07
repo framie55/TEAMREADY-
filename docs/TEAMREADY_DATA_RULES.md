@@ -8,7 +8,7 @@ _These rules are non-negotiable. Read this before touching any player, statistic
 
 ## Known verified identities (as told by the club manager — treat as ground truth, do not second-guess)
 
-- **"Jiffy" = James Dickinson** (verified player id `6a61af1a2757ed8f54b81e60`).
+- **"Jiffy" = James Dickinson** (verified player id `6a61af1a2757ed8f54b81e60`). **Do not confuse with Mark Dickinson** (verified player id `6a362b0234d01f9e9562092c`) — a totally different person, known as just "Mark" or "Mark Dickinson," no nickname needed since the full name alone is unambiguous. Two separate Dickinsons at this club; both real, both active.
 - **There are two totally different people both called Paul Griffiths — a goalkeeper and an outfield player.** The club calls the outfield player **"Griffo"** specifically to keep them apart. Confirmed mapping, verified 2026-09-07: `Paul Griffiths (Griffo)` = outfield/forward, id `6a362b0234d01f9e9562092b`, nickname `Griffo`. `Paul Griffiths (GK)` = goalkeeper, id `6a4de9c6ff18cb10446b5d26`, nickname `Griff`. These must remain two separate verified records, never merged.
 - **Craig Smith must never be changed to or confused with Paul Smith.**
 

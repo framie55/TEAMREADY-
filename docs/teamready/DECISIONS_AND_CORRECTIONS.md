@@ -36,11 +36,21 @@ Every correction Paul has given overrides an earlier assumption, generated answe
 **Instruction (Paul):** "he need the mom also" — the FA email recipient (Mick Greenwell) needs MOTM included, not just lineup/goals/cards.
 **Effect:** the generator reads `form.motm_player_id` (the manager's own pick from the existing Match Report page selector) first, falling back to the `MotmVote` player-vote tally with vote counts if no manager pick has been made yet — never inventing a MOTM.
 
+## 2026-09-09 — FA registered squad list cross-check: two spelling fixes, one duplicate resolved, one Claude documentation error corrected
+
+**Source:** Paul sent a screenshot of the FA's official registered squad list — the authoritative source for player name spelling.
+
+- **"Paul Diamond" confirmed correct** (database had "Paul Dimond") — fixed. Known Issues #24.
+- **"James Shickle" confirmed correct** (database had "James Shikle", missing a letter) — fixed. Known Issues #27.
+- **Stephen Halliday duplicate resolved**: Paul confirmed "Stephen Halliday is Buddy and only played 2nd half vs Darlington RA a few weeks ago but injured atm" — matched exactly to the real record's actual match history. The empty duplicate (created 6 Sept, zero stats) was archived; the real record's spelling was corrected from "Haliday" to "Halliday" and his injury status logged. Known Issues #28.
+- **Correction to Claude's own earlier documentation, not a database error:** `APP_OVERVIEW.md` had wrongly stated "Manager: Paul Frame, known as 'Corby.'" **Paul's correction:** "Framie is me Paul Frame, Corby is Anthony Richardson, we are both managers. I play also, Corby doesn't." The database was correct throughout (Paul Frame = Framie, Anthony Richardson = Corby, both are `Player` records with the right nicknames) — the error was entirely in Claude's inference from the matchday programme, now fixed. Known Issues #29.
+- **Still open, raised by the same FA list:** "Paul Griffith" (singular, archived, previously assumed a duplicate of Griffo) appears as a *separately* registered name from "Paul Griffiths" (plural) on the FA's own list — the "duplicate" assumption is now in question, not confirmed either way. Known Issues #5 reopened. **Needs Paul's explicit confirmation before this is treated as settled.**
+
 ## Pending — not yet confirmed by Paul
 
-- **"Paul Dimond" vs "Paul Diamond"** spelling (Known Issues #24) — which is correct has not been confirmed.
+- **Whether "Paul Griffith" (singular) is a real, separate person or genuinely a duplicate of Griffo** (Known Issues #5, reopened) — the FA's own registered list suggests it may not be a duplicate at all.
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.
-- **Whether the full player-identity register needs a systematic duplicate audit** across all ~90+ records, beyond the specific cases already found.
+- **Whether the full player-identity register needs a systematic duplicate audit** across all ~90+ records — the FA registered-squad cross-check (2026-09-09) covered the 37 active players and found 2 real spelling errors plus 1 more duplicate, so a similar pass may be worth doing for the remaining ~55 inactive/archived records too.
 
 ## How this file is maintained
 

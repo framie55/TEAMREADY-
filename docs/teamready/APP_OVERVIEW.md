@@ -2,7 +2,7 @@
 
 ## The club
 
-**Grindon Board Inn Over 40s FC** (also called Grindon Broadway Over 40s FC). Established 1995, over 25 years running. Based at the Board Inn pub, Durham Road, East Herrington, Sunderland SR3 3NS — players and supporters gather there after every match. Plays in the **Sunderland & District Mill View Social Club Over 40s League, Division One**. Manager: **Paul Frame**, known as "Corby." Chairman: Brian Burnikell. Club values: respect, teamwork, enjoyment, commitment, pride. Charity partner: Amber's Legacy. Main shirt sponsor: GKB Financial Planning. Other sponsors include UCS Renewables/Technologies, SafeSwitch Solutions, GM Sports Therapy.
+**Grindon Board Inn Over 40s FC** (also called Grindon Broadway Over 40s FC). Established 1995, over 25 years running. Based at the Board Inn pub, Durham Road, East Herrington, Sunderland SR3 3NS — players and supporters gather there after every match. Plays in the **Sunderland & District Mill View Social Club Over 40s League, Division One**. **Co-managers: Paul Frame ("Framie" — also plays) and Anthony Richardson ("Corby" — does not play).** Chairman: Brian Burnikell. Club values: respect, teamwork, enjoyment, commitment, pride. Charity partner: Amber's Legacy. Main shirt sponsor: GKB Financial Planning. Other sponsors include UCS Renewables/Technologies, SafeSwitch Solutions, GM Sports Therapy.
 
 Source: club's own matchday programme (Week 6, 2026/27 season), cross-checked against live app data. — *Confirmed.*
 

@@ -52,3 +52,28 @@ Nothing above was fixed in this session. Next planned stage: a full prioritised 
 - The "Paul Griffith" player record (`...fe3c`) was deliberately left alone: it's still referenced by the (already-voided, harmless) `LmsEntry`/`LmsPick` pair above, so deleting the player now would only create orphaned references. Recommendation stands: leave archived unless the manager wants all three records removed together as one deliberate operation.
 
 **No data was changed in this entry** — investigation and documentation only.
+
+## 2026-09-09 (continued) — Matchday UX: removed public recording risk in Matchday Studio; auto-finalise on Full Time
+
+At the club manager's request, audited the player portal and the live matchday recording screen for UX friction (two read-only research passes). Two concrete, approved fixes came out of the matchday audit:
+
+**1. Removed the entire live-recording control surface from Matchday Studio** (`src/pages/MatchdayStudio.jsx`). This page turned out not to be a simple broadcast view with a couple of extra buttons — it was a full second live-match engine (Kick Off, Half Time, Second Half, Goal, Card, Sub, Full Time), each writing directly to `MatchTimelineEvent`, `Fixture`, and `Payment`, on a route (`/matchday-studio`) with **no login or role check at all**. Confirmed with the club manager that this recording capability has never actually been used — Live Match Centre is the only screen used to run a match — and confirmed separately that the page's read-only display (scoreboard, timeline, on-pitch/bench, score) already loads correctly from real database records on open, independent of these controls. Removed: the Kick Off button, the Goal/Card/Sub/Half-Time/Full-Time action grid, the `ActionBtn` helper, the four Record*/FullTime modals and their imports, the goal-celebration overlay, and all now-orphaned state/handlers (`handleKickOff`, `handleHalfTime`, `handleSecondHalf`, `handleGoalRecorded`, `handleCardRecorded`, `handleSubRecorded`, `handleFullTime`, `addEvent`, plus the now-unused `Play`/`useCallback` imports). Nothing else on the page (broadcast scoreboard/timeline, stats, MOTM voting, photos) was touched.
+
+**2. Folded "Finalise Match" into "Confirm Full Time"** (`src/pages/LiveMatchCentre.jsx`). Per Known Issues #7/#23, a match could look fully completed while official per-player stats silently stayed unfinalised, because finalising was a separate, easy-to-miss second button. `handleFullTime` now calls `handleFinaliseMatch()` itself at the end — one action, one result. The manual "Re-finalise Match" button is deliberately left in place (finalise is documented as idempotent, `$set` not `$inc`), so a manager can still safely re-run it after correcting a mistake via Undo Last.
+
+**Tested:** `npm run build` verified clean after each change and again after final cleanup (exit 0, no new errors). Ran `npx eslint` on both changed files specifically to check for anything newly broken by the edits (not a full-repo lint pass) — found and removed one newly-unused import (`useCallback`) caused by the edit; all other warnings shown were pre-existing and unrelated to this change. No test suite exists to run (Known Issues #6). Not manually clicked through in a live match (no fixture in progress); verified by full-file reads, dry-run diffs, and build/lint checks instead.
+
+**Checkpoints:** `6a9ebe223850f24a7163c776` = state immediately before these changes (restore to undo). `6a9f08fe076753356d30198d` (git commit `580b4000ac5bf1f72b408b2a18831121ef7e3a91`) = state immediately after, taken as the rollback point.
+
+**Still open from the same UX review, not yet actioned:** duplicate-tap protection on goal/sub/card entry, an on-screen toast when a card fine is raised, per-event edit/delete (today's "Undo" only reverses the single most recent event), and the player-portal structural issues (two home screens, two nav menus, two backend aggregators — login was ruled out as a pain point since the club has already standardised on Name+PIN).
+
+## 2026-09-07 (LMS) — Recorded Kevin Berry's buyback payment and credited the pot
+
+**What happened:** Club manager confirmed (via WhatsApp payment screenshot) that Kevin Berry paid his £10 LMS buyback fee directly via a Monzo link, outside the app's Stripe flow. His `LmsEntry` (`6a3abb05d53687455d99ee26`) and GW4 pick (Aston Villa, `LmsPick` `6a9f0388f17e42aac3d03f73`) had already been entered correctly by the manager in the app; the only gap was the payment record and pot credit, since the Monzo payment bypassed the automatic Stripe webhook that normally does this.
+
+- Verified there is exactly one "Kevin Berry" player record (id `6a362b0234d01f9e95620926`) — no identity ambiguity.
+- Created a `Payment` record (`6a9f0a4cc4ac78dc5c4bb7d7`, type `lms_buyback`, £10.00, status `cash_received` with `cash_confirmed_by`/`cash_confirmed_at` set) so this payment is now auditable in the ledger like any other manually-collected payment, notes explicitly stating it was via Monzo, not Stripe.
+- Linked it via `LmsEntry.entry_payment_id`.
+- Credited the competition pots using the **exact same split the app's own Stripe flow uses** (`base44/shared/lmsFeeSplit.ts`: 80% prize pot / 5% players' pool / 15% club pot when there's no valid referrer — confirmed Kevin's entry has no referrer code) rather than putting the full £10 into the prize pot, so his contribution stays consistent with every other entrant's: **prize pot +£8.00 (£376→£384), club pot +£1.50 (£68→£69.50), players' pool +£0.50 (£23.50→£24).**
+
+No code was changed; this is a data entry, done manually because the payment happened outside the app's own payment flow.

@@ -141,3 +141,16 @@ Reads `LeagueTable` directly (no whitelist function needed — the entity holds 
 
 **Tested:** `npm run build` clean; targeted `eslint` on both changed/new files clean, zero warnings.
 **Checkpoint:** `6a9fb18dc9c35a7259dc2b8b` / commit `ad803b512094edbd69351f003078a2e65ba2fd62`.
+
+## 2026-09-08 (continued) — Added a real "Become a Sponsor" pitch page, wired into the existing (previously empty) lead pipeline
+
+Built `src/pages/public/BecomeASponsor.jsx` (route `/public/become-a-sponsor`) — a proper sponsorship pitch page (package descriptions by real category: Kit, Pitch/Matchday, Trophy & Presentation Night, Match Ball/Match Fee, General/Programme, Charity Partner) with an enquiry form, separate from the existing sponsor directory pages.
+
+**Real integration found and used, not invented:** `SponsorLead` entity and an admin `SponsorHub.jsx` page already existed for managing a sponsor-outreach pipeline (`pipeline_stage`, `likelihood_score`, etc.) but had zero real records — nothing fed it. The new form's submissions write directly to `SponsorLead` (`pipeline_stage: 'interested'`, matching how an inbound enquiry — as opposed to outbound club-initiated contact — should be staged), so real leads now land in Paul's existing pipeline tool automatically.
+
+**No pricing was invented** — package descriptions are qualitative only ("get in touch for pricing"), since no real rate card exists in the app or was supplied by Paul.
+
+Updated the "Get In Touch" CTA on both sponsor directory pages (`PublicSponsors.jsx`, `SupporterSponsors.jsx`) to link here instead of a plain `mailto:` link (which also resolves the earlier-flagged inconsistency of two different, possibly-wrong contact emails being used in different places — this bypasses that ambiguity entirely for the sponsorship funnel specifically; the underlying email-address question is still open elsewhere).
+
+**Tested:** `npm run build` clean; targeted `eslint` on all 3 changed/new files clean, zero warnings.
+**Checkpoint:** `6a9fb34c5624ec5771338033` / commit `e7a8cf5295ba04bd7de5e7f5ccdaa5bf3f67d677`.

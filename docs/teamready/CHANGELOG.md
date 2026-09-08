@@ -226,3 +226,16 @@ Paul also asked for the main sponsors to be "plastered... predominant on every p
 
 **Tested:** `npm run build` clean.
 **Checkpoint:** `6a9fc1d0b494fa3e99c93919`.
+
+## 2026-09-08 (continued) — UCS Renewables established as the single dominant main sponsor, not tied with the charity partner
+
+Paul clarified: UCS Renewables has given the most sponsorship money and should be treated as *the* main sponsor, predominant everywhere — the others (SafeSwitch, DKJ Joinery, David Graham Roofing, GKB Financial Planning) are minor sponsors and should show, but "nowhere near as much."
+
+Checked the actual Sponsor records before changing anything: `priority: 'main'` was already set correctly on UCS Renewables (`sponsorship_type: 'kit'`), but the same flag is also set on Amber's Legacy — which is `sponsorship_type: 'charity_partner'`, a different category (a charity partnership, not a paying commercial sponsor). Rather than touch that flag, rebuilt `MainSponsorStrip.jsx` to key off both fields: it now shows one large, dominant "Main Club Sponsor" logo (the sponsor with `priority: 'main'` whose `sponsorship_type` isn't `charity_partner` — today that's only UCS Renewables) plus a much smaller row of standard-priority sponsor logos alongside it. Amber's Legacy stays out of this commercial-sponsor hierarchy entirely — it already has its own placement on the About page as the club's charity partner.
+
+Also added a dedicated "Main Club Sponsor" premium card for UCS Renewables at the very top of `/public/sponsors`, above the existing GKB Financial Planning and FNF Method cards, so the visual hierarchy on that page now matches the money behind it.
+
+**Flagged to Paul, not yet confirmed:** Amber's Legacy is still `priority: 'main'` in the database even though it's excluded from the commercial strip by category — left as-is since it's not a competing paid sponsor, but worth Paul confirming that's the right long-term read.
+
+**Tested:** `npm run build` clean.
+**Checkpoint:** `6a9fc918822cbd2ac754608d`.

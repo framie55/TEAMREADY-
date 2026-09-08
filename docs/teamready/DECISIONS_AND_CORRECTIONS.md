@@ -80,6 +80,13 @@ Every correction Paul has given overrides an earlier assumption, generated answe
 
 Paul registered `grindonboardinn40s.co.uk` via IONOS (plus `.com` and `.info` in the same bundle), confirmed by screenshot — status "Domain not in use," expiring 08/09/2027. **Not connected to anything live** — per Paul's own standing instruction, no domain gets connected to the app until he explicitly approves launch. Purchasing/registrar management is Paul's own action; Claude has no registrar access and didn't do anything here beyond logging it. One housekeeping item on Paul's side, not Claude's: the `.info` domain shows "Confirmation of contact details required" in IONOS — needs him to resend/complete the verification email, unrelated to the website build.
 
+## 2026-09-08 (continued) — Correct club contact email confirmed
+
+**Background:** three different, conflicting email addresses had turned up across the app during the website build: `grindonbroadway@email.com` (hardcoded in `PublicContact.jsx`), `club@gridonboardinn.com` (hardcoded in `SupporterSponsors.jsx`, also misspelled "gridon"), and `grindonbroadwayover40s@gmail.com` (the actual Base44 account owner's email on the `Club` record's `created_by` field). Flagged as unresolved in earlier changelog entries rather than guessed at.
+**Instruction (Paul):** "grindonbroadwayover40s@gmail.com that's the correct email."
+**Effect:** `PublicContact.jsx` updated to use the confirmed address. The other two wrong addresses were already removed from the sponsor pages earlier today (replaced with links to the new "Become a Sponsor" page) — this closes out the very last stray reference.
+**Database records affected:** none — code-only correction.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

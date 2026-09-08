@@ -167,3 +167,13 @@ Reads `ClubNews` directly (no private fields on this entity). Filters out soft-d
 
 **Tested:** `npm run build` clean; targeted `eslint` on all 3 changed/new files clean (one pre-existing unused `loading` variable, unrelated).
 **Checkpoint:** `6a9fb4ff3fb0172b1dbfa71d` / commit `7c6e0b3a4c131550de6e1dc691f25e239cf589d7`.
+
+## 2026-09-08 (continued) — Added the public About page; resolved the club's correct contact email
+
+Built `src/pages/public/PublicAbout.jsx` (route `/public/about`, added to the public nav as the second item after Home) — the last of the originally-listed 12 public page types. Content is entirely from already-verified real facts (founded 1995, Sunderland & District Mill View Social Club Over 40s League Division One, club values, Amber's Legacy charity partner, real `Club.home_ground_*` fields for the ground, the Board Inn as the clubhouse) — nothing new invented. No committee/staff bios included since no real entity backs that yet (see Known Issues — still blocked on real photos from Paul).
+
+**Contact email resolved:** Paul confirmed `grindonbroadwayover40s@gmail.com` is correct, closing a three-way conflict (two other wrong addresses were already replaced on the sponsor pages earlier today; this fixes the last one, in `PublicContact.jsx`).
+
+**Tested:** `npm run build` clean; targeted `eslint` on all 3 changed files — 2 pre-existing unused-import errors in `PublicContact.jsx` (present before this change, unrelated to the edits made), nothing new introduced.
+**Checkpoint:** `6a9fb67c3dfdff2f8dc236cb` / commit `bb9a03aaa41e737515a730bb70d1f105e51ac529`.
+**Public website build is now feature-complete against Paul's original 12-page spec** except: Match Reports archive (needs a publish/approval step first), Programme Archive (blocked, no real programme data in-app).

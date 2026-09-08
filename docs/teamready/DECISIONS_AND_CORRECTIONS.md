@@ -87,6 +87,18 @@ Paul registered `grindonboardinn40s.co.uk` via IONOS (plus `.com` and `.info` in
 **Effect:** `PublicContact.jsx` updated to use the confirmed address. The other two wrong addresses were already removed from the sponsor pages earlier today (replaced with links to the new "Become a Sponsor" page) — this closes out the very last stray reference.
 **Database records affected:** none — code-only correction.
 
+## 2026-09-08 (continued) — Investigated a genuine way to upload images directly; found the real mechanism, but couldn't safely use it, and removed the resulting risk
+
+**Paul's question:** why haven't the sponsor logos he's sent multiple times been connected — can Claude just use the ones already sent or already on the app?
+
+**What was found, for real:** the app does have a genuine file-upload API (`base44.integrations.Core.UploadFile`, used throughout the app's own admin screens — e.g. the Sponsor edit modal). A backend function could call this with service-role access. Built one (`uploadAssetAndLink`) to prove it.
+
+**Why it couldn't be completed:** actually moving the bytes of the images Paul sent in chat into that function required either (a) direct network access from Claude's own environment to Base44's servers — blocked by Claude's own organisation's outbound proxy policy, confirmed by direct test; or (b) relaying the image data through Claude's own conversation context as base64 text — technically possible but prohibitively expensive (a single small logo consumed ~70,000+ tokens of context; five images would have been unworkable). A third route (Artifact asset storage as a relay) turned out to require a capability not enabled for this account. Checked whether the logos might already be sitting in Base44 under some other name (`ProgrammeAsset` sponsor_logo entries) — confirmed empty, they aren't.
+
+**Security correction, caught before it caused harm:** the `uploadAssetAndLink` function, as written, was unauthenticated and could overwrite any field on any entity via `asServiceRole` — a real vulnerability if left live and undiscovered, regardless of whether it was ever wired up to anything. Disabled it outright (returns 410) rather than leave working-but-unused attack surface sitting in the codebase, undoing the point of the security work done earlier this session.
+
+**Practical answer given to Paul:** the fastest real path is the one the app already provides — open the Sponsor record in the app's own admin screen (Sponsor edit modal) and use its existing logo upload field directly; it uses the exact same underlying API. Claude verifies the result afterward.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

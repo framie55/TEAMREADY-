@@ -201,3 +201,15 @@ Paul asked how to get the website live. While explaining the process, checked wh
 **Tested:** `npm run build` clean.
 **Checkpoint:** `6a9fb9a3a694c252f85c2c1c` / commit `609200adb87e8917318c88b6334856b4388ee4f5`.
 **Not yet built/decided:** the actual domain connection (Base44 dashboard settings + DNS records at IONOS) is Paul's own action in each platform's UI — Claude has no tool access to either. Nothing is connected or public yet; explained the steps to Paul, awaiting his explicit go-ahead to launch per his standing instruction.
+
+## 2026-09-08 (continued) — Investigated a real image-upload path; found and then had to disable it (security)
+
+Paul asked why the sponsor logos he'd sent multiple times still weren't connected. Investigated properly rather than repeating the earlier answer: found the app's real file-upload API (`base44.integrations.Core.UploadFile`, used by the app's own admin screens) and built `base44/functions/uploadAssetAndLink/entry.ts` to prove a backend function could use it with service-role access.
+
+**Could not be completed safely:** transferring the actual image bytes from Claude's own environment into that function was blocked by (a) Claude's own organisation's network policy preventing direct calls to Base44's servers, and (b) the prohibitive token cost of relaying binary data as base64 through the conversation itself. A third route via Artifact asset storage needed a capability not enabled for this account. Confirmed via query that the logos aren't already sitting anywhere else in the app (`ProgrammeAsset` sponsor_logo entries: none).
+
+**Security fix:** the `uploadAssetAndLink` function as written was unauthenticated and could have overwritten any field on any entity via service-role access — a real vulnerability regardless of whether it was ever used. Disabled it immediately (now returns HTTP 410) rather than leave unused-but-dangerous attack surface in the codebase.
+
+**Tested:** `npm run build` clean.
+**Checkpoint:** `6a9fbc148d846c9609c31adb` / commit `ac7c3ad3cbaeb9ddd576dc6d7b66bfa7463247b5` (the function was disabled in the same session it was created — no separate checkpoint exists for the live version).
+**Practical outcome:** fastest real path remains Paul uploading directly via the Sponsor edit modal already in the app (same underlying upload API) — Claude will verify each result once uploaded.

@@ -251,3 +251,19 @@ Along the way, removed the "Team Login" button from the public site's header (Pa
 The player/staff app is unaffected and unchanged — same login (Name + PIN for players, email/password/Google for managers), same address as before.
 
 **Checkpoints across this piece of work:** `6a9fda9b410ca379978c5b14` (login button removed), `6a9fe654ccf6a094673c8cd2` (redirect bug fix).
+
+## 2026-09-08 (continued) — Premium visual redesign, phase 1: homepage rebuild
+
+Paul sent a detailed written brief ("PREMIUM VISUAL QUALITY UPGRADE") asking for the public site to look like a polished, professional football-club/sports-media product rather than "unfinished and homemade" — specifically calling out inconsistent logo/badge presentation (screenshots, stretched images, random white boxes), a thin miscellaneous-looking sponsor strip, and weak typography/spacing. Asked for the homepage to be rebuilt first and approved before the same treatment goes to the rest of the site.
+
+**Real constraints flagged to Paul before starting** (both already anticipated by his own brief's fallback rules): none of the sponsor logo files supplied so far are transparent PNGs — they're flat JPGs/PNGs with backgrounds baked in — so true "remove the background" isn't possible without new source files; and no real match/squad photography has been supplied, so hero/photo sections use a texture-based design treatment instead of fake or generated photos.
+
+**Built:**
+- `src/components/public/DesignSystem.jsx` — new shared tokens (colours, radii, shadows, font) plus reusable `LogoPlate` (the actual fix for inconsistent logos: fixed-size white card, `object-contain` only — never crops/stretches — same treatment regardless of a logo's native size, so it doesn't need touching again if a transparent version arrives later), `InitialsPlate` (graceful fallback, never a broken image), `SectionHeading`/`SectionLabel`, and a stadium/pitch-texture CSS background (floodlight-style radial glows + faint pitch-line pattern) used in place of photography.
+- Fixed a real, previously-unnoticed bug in `ClubBadge.jsx`: it was rendering the club shield with `object-cover` inside a circular crop, which cuts the corners off a non-circular badge — exactly the "badly cropped" complaint in the brief. Switched to `object-contain` with padding, so the full shield is always visible, whole and unstretched.
+- Simplified `MainSponsorStrip.jsx` (the header strip on every page) to show only the main sponsor, tastefully — the brief specifically said not to put a sponsor strip under the nav "unless it looks intentionally designed," and cramming the whole roster in there was the opposite of that.
+- Rebuilt `PublicHome.jsx`: taller hero with the new stadium-texture background and much larger type scale, Next Match/Latest Result now sit side by side rather than stacked, all cards unified under one shared style, and — the big structural change — a new substantial "Sponsors & Partners" section further down the page: the main sponsor gets a large dedicated feature (logo, name, thank-you message, website link), everyone else sits in a consistent partner grid below it with hover effects and links. This replaces the old thin "Our Supporters" strip entirely.
+
+**Tested:** `npm run build` clean, targeted `eslint` on every changed file clean.
+**Checkpoint:** `6a9fec948463eb614af086ea`.
+**Not yet done:** the rest of the public pages (Fixtures, Squad, Sponsors, News, About, Contact) — deliberately held back per Paul's own instruction to review the homepage first.

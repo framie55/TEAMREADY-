@@ -68,6 +68,14 @@ Every correction Paul has given overrides an earlier assumption, generated answe
 **Effect:** Known Issues #31 (new row, Fixed). Known Issues #3 (no row-level security anywhere in the app) remains open — this fix closes the specific live exposure, not the underlying structural gap.
 **Database records affected:** none — code-only change.
 
+## 2026-09-08 — Club badge confirmed correct as-is; only the stale database field needed fixing
+
+**Instruction (Paul):** "Yes the badge is correct" — confirming the badge already live across the app (the hardcoded `grindonboardinnbadge.png` file, "Grindon Board Inn," EST. 1995) matches the real badge image he supplied, so no visual/code change was needed.
+**Finding (mine, verified before acting):** the ~30 hardcoded code references were already correct; the only actual inconsistency was the separate `Club.badge_url` field pointing at a different, unused file, and `Club.name` being blank.
+**Effect:** updated `Club.badge_url` to the confirmed-correct file, and set `Club.name` to "Grindon Board Inn Over 40s FC." Known Issues #30 closed.
+**Database records affected:** `Club` `6a38094e4d090aec62268573` (`badge_url`, `name`).
+**Also confirmed (verbally, "Use any player and yes you can take them from the app no problem"):** the player-card graphics Paul sent are a style reference, not finished assets to use as-is — Claude builds the card component itself, pulling real photos/stats from whichever `Player` records make sense, rather than needing one hand-supplied per player.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

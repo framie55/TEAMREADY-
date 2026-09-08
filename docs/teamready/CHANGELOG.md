@@ -92,3 +92,13 @@ Paul approved the fix flagged in the Phase 1 report. Created `base44/functions/g
 **Tested:** `npm run build` clean; targeted `eslint` on all 6 changed files — only pre-existing, unrelated unused-import errors present (already documented in Known Issues #18), nothing new introduced.
 **Checkpoints:** `6a9f346b7548fad476affefe` (before) → `6a9f35ec4dd8fe09cdbc6ac1` / commit `93585d57d7055c0ebe798d7a25224d27399ecd04` (after).
 **Still open:** Known Issues #3 — no row-level security anywhere in the app. This fix closes the specific live exposure on these 5 pages; the same direct-entity-read pattern should be checked for other sensitive entities (e.g. `Sponsor`, `ClubNews`) before any further public-website build work.
+
+## 2026-09-08 — Club badge database field fixed; player-card style approach confirmed; two players added to the identity register
+
+Paul confirmed the badge already showing live in the app is correct, so no code/asset change was needed — only `Club.badge_url` (previously pointing at a different, unused file) and `Club.name` (previously blank) needed updating to match reality. Known Issues #30 closed.
+
+Paul also sent a full homepage mockup (desktop + mobile) matching the existing gold/black/dark design already live on the public pages — confirms extending the existing pages, not rebuilding, remains the right approach. Confirmed the player-card graphics he'd sent are a style reference: Claude builds the card component itself using real `Player` data/photos rather than needing pre-made cards per player.
+
+**Database records affected:** `Club` `6a38094e4d090aec62268573` (`badge_url`, `name`) — data-only change, no code touched.
+
+Added two players confirmed via direct database query against real player-card graphics Paul sent — Dave Taylor ("Disco," DEF #4) and Anth Holmes ("Holmsey," FWD #17) — to `PLAYER_IDENTITY_REGISTER.md`. Both were already correct, real, active records; the register was just incomplete.

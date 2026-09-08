@@ -191,3 +191,13 @@ No database schema change was needed — the draft report text lives only in the
 **Tested:** `npm run build` clean; targeted `eslint` — one pre-existing unused import (`Plus`, present before this change, unrelated to the edits made) left alone.
 **Checkpoint:** `6a9fb84909306835db38b10e` / commit `007666ef3b75628aa8d3a42cfb324877d8c60b8b`.
 **Still open:** the AI-generated match analysis (`generateMatchReportAi`, Known Issues #8) is a separate feature and still auto-writes with no approval gate — not touched by this change.
+
+## 2026-09-08 (continued) — Found and fixed a real launch blocker: the domain root would have shown a login screen, not the website
+
+Paul asked how to get the website live. While explaining the process, checked what actually happens at the bare root path `/` — the path a custom domain like `grindonboardinn40s.co.uk` points at. **Found it was not in `App.jsx`'s public-paths allowlist**, so any anonymous visitor hitting the domain root would have been sent straight to the staff login screen instead of the public homepage — the whole site would have looked broken/private from the moment the domain went live.
+
+**Fixed:** added a special case in `App.jsx` — an anonymous visitor at exactly `/` is now redirected to `/public` instead of the login page. Logged-in staff still land on their normal Dashboard at `/`, unaffected.
+
+**Tested:** `npm run build` clean.
+**Checkpoint:** `6a9fb9a3a694c252f85c2c1c` / commit `609200adb87e8917318c88b6334856b4388ee4f5`.
+**Not yet built/decided:** the actual domain connection (Base44 dashboard settings + DNS records at IONOS) is Paul's own action in each platform's UI — Claude has no tool access to either. Nothing is connected or public yet; explained the steps to Paul, awaiting his explicit go-ahead to launch per his standing instruction.

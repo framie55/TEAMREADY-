@@ -282,3 +282,18 @@ Rebuilt `PublicHome.jsx` again from scratch toward this reference:
 
 **Tested:** `npm run build` clean, `eslint` on both changed files clean.
 **Checkpoint:** `6a9ff27be25edde5bd5fcd07`.
+
+## 2026-09-08 (continued) — Added a "Player Login" entry point to the public site nav
+
+Paul asked (in a fairly garbled voice-to-text message, interpreted carefully): does the public website have a way for players specifically to click through to a name-dropdown + PIN login, landing them in their own player portal? This isn't a contradiction of his earlier "no login for the public, it's a public site" instruction — that was about removing a generic manager/admin login prompt from public view; this is a distinct, clearly-labelled entry point for players specifically, which he now wants added.
+
+Investigated rather than assumed: the Name+PIN flow he described already exists, but not at `/player-login` (which is actually an SMS-code/email-link flow) — it's a `mode: 'player'` → `playerTab: 'pin'` state inside the existing `/login` page (`src/pages/Login.jsx`), using a `NameSearchSelect` searchable dropdown plus a PIN field, calling the existing `loginWithNamePin` backend function.
+
+**Built:**
+- `Login.jsx`: added support for a `?player=1` query param that drops the page straight into the Player/PIN tab, skipping the Manager/Player toggle — a clean one-click destination for a public nav link.
+- `PublicWebLayout.jsx`: added a "Player Login" item to the public nav (desktop, mobile menu, and footer), linking to `/login?player=1`, styled as a distinct cyan outlined button so it doesn't visually compete with the gold "Sponsors" call-to-action or read as a generic staff login.
+
+Also noted in passing: `PublicWebLayout.jsx`'s header structure has changed since the last session touch (now a two-row header with the main sponsor built into row one) — this wasn't done by Claude this session, most likely Paul editing directly via Base44's own "Chat to Edit" AI feature. Read the live file fresh before editing rather than assuming it matched what was last built, to avoid clobbering his own changes.
+
+**Tested:** `npm run build` clean; `eslint` clean on both changed files (pre-existing unrelated warnings in `Login.jsx` untouched).
+**Checkpoint:** `6aa033e72f59ef94088153e6`.

@@ -76,6 +76,10 @@ Every correction Paul has given overrides an earlier assumption, generated answe
 **Database records affected:** `Club` `6a38094e4d090aec62268573` (`badge_url`, `name`).
 **Also confirmed (verbally, "Use any player and yes you can take them from the app no problem"):** the player-card graphics Paul sent are a style reference, not finished assets to use as-is — Claude builds the card component itself, pulling real photos/stats from whichever `Player` records make sense, rather than needing one hand-supplied per player.
 
+## 2026-09-08 — Domain registered: grindonboardinn40s.co.uk
+
+Paul registered `grindonboardinn40s.co.uk` via IONOS (plus `.com` and `.info` in the same bundle), confirmed by screenshot — status "Domain not in use," expiring 08/09/2027. **Not connected to anything live** — per Paul's own standing instruction, no domain gets connected to the app until he explicitly approves launch. Purchasing/registrar management is Paul's own action; Claude has no registrar access and didn't do anything here beyond logging it. One housekeeping item on Paul's side, not Claude's: the `.info` domain shows "Confirmation of contact details required" in IONOS — needs him to resend/complete the verification email, unrelated to the website build.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

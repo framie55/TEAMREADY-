@@ -267,3 +267,18 @@ Paul sent a detailed written brief ("PREMIUM VISUAL QUALITY UPGRADE") asking for
 **Tested:** `npm run build` clean, targeted `eslint` on every changed file clean.
 **Checkpoint:** `6a9fec948463eb614af086ea`.
 **Not yet done:** the rest of the public pages (Fixtures, Squad, Sponsors, News, About, Contact) — deliberately held back per Paul's own instruction to review the homepage first.
+
+## 2026-09-08 (continued) — Homepage v2: switched to a light sports-media dashboard style after Paul sent a much more specific reference image
+
+The first homepage rebuild (dark navy/gold theme) wasn't what Paul had in mind. He sent a reference image — a light-background layout with a full-bleed real match-action photo hero, a horizontal "Next Match" banner, a 4-up dashboard row (Latest Result / Latest News / League Position / Player of the Month), and a flat "Our Partners" logo strip — and said this was the look he actually wanted, "more premium and more user friendly," as opposed to "the club portal" look.
+
+Rebuilt `PublicHome.jsx` again from scratch toward this reference:
+- Added a `LIGHT` palette to `DesignSystem.jsx` (white cards on soft grey, dark navy text, same gold brand accent) alongside the existing dark one — the site header/nav stays dark navy as before (matches the reference's own header), only the homepage content area switched to light.
+- New full-width "Next Match" banner directly under the hero (cream/gold-tinted, badge + opponent badge + date/time/venue), matching the reference layout.
+- New 4-card dashboard row: Latest Result, Latest News, League Position, and Player of the Month — all built from real data. League Position pulls the club's actual row from the existing `LeagueTable` entity (real P/W/D/L/GD/PTS, no fabrication). Player of the Month is a genuinely new wire-up: reads the most recently closed `PotmPoll` (category `month`) and cross-references the winner's real photo/position via the existing `getPublicPlayerData` function — this feature existed in the admin app already but had never been surfaced publicly before.
+- "Our Partners" simplified to a single flat strip matching the reference's visual density, main sponsor's logo kept modestly larger than the others within that same strip as a middle ground with the earlier "give the main sponsor the most prominent position" instruction.
+
+**Real constraint, unchanged from before and worth restating:** the reference's hero is a genuine match-action photograph; no real photos have been supplied, so the hero uses an abstract stadium/floodlight CSS treatment instead. Asked Paul directly whether he has real matchday/squad photos to send — hero, news, and Player of the Month would all improve significantly with real photography, and the code is already structured so that's a single swap once photos exist, not a rebuild.
+
+**Tested:** `npm run build` clean, `eslint` on both changed files clean.
+**Checkpoint:** `6a9ff27be25edde5bd5fcd07`.

@@ -154,3 +154,16 @@ Updated the "Get In Touch" CTA on both sponsor directory pages (`PublicSponsors.
 
 **Tested:** `npm run build` clean; targeted `eslint` on all 3 changed/new files clean, zero warnings.
 **Checkpoint:** `6a9fb34c5624ec5771338033` / commit `e7a8cf5295ba04bd7de5e7f5ccdaa5bf3f67d677`.
+
+## 2026-09-08 (continued) — Design mockup received for 6 page layouts; flagged as style reference only, not real content
+
+Paul sent a 6-panel visual mockup (Fixtures & Results, Match Centre, Meet the Team, League & Stats, Latest News, Sponsors). **Every specific detail in it is fictional** — opponent names ("Roker Old Boys"), players ("Steve Thompson," "Mark Wilson," "Dave Hunter"), league name ("Wearside Veterans League"), ground ("Silksworth Sports Complex"), founding year ("EST. 2015") all conflict with Grindon's real, already-verified data. Flagged to Paul explicitly and confirmed: taking layout/visual-design ideas only (combined League+Stats page, tabbed Match Centre with a formation graphic, Meet the Team grouped-by-position layout, News+Programme combined listing), never any of the placeholder names/facts. Nothing was built directly from this yet beyond the News page below, which uses the layout idea with 100% real `ClubNews` data.
+
+## 2026-09-08 (continued) — Added the public News archive page
+
+Built `src/pages/public/PublicNews.jsx` (route `/public/news`, added to the public nav, linked from the homepage's "Latest News" section — which also fixed a pre-existing bug where that link pointed at `/public/gallery`, a route that doesn't exist under `/public/*`).
+
+Reads `ClubNews` directly (no private fields on this entity). Filters out soft-deleted records (`deleted_at`) and — confirmed via earlier recon — `TrophyCabinet.jsx` reuses this same entity to store trophy records with a `"TROPHY:"` title prefix and JSON stuffed in `body`; those are filtered out too so they never appear as fake "news" on the public site. Pinned items sort first; each item expands in place for the full body rather than needing a separate detail page.
+
+**Tested:** `npm run build` clean; targeted `eslint` on all 3 changed/new files clean (one pre-existing unused `loading` variable, unrelated).
+**Checkpoint:** `6a9fb4ff3fb0172b1dbfa71d` / commit `7c6e0b3a4c131550de6e1dc691f25e239cf589d7`.

@@ -124,6 +124,18 @@ Verified each named player against real records before writing anything (golden 
 
 Immediately afterward, Paul added: **Paul Mooney** (an active player, confirmed) also owns **The FNF Method**, and will be paying for a pitchside banner like DKJ/David Graham Roofing. The FNF Method already existed as a hardcoded showcase card on `/public/sponsors` (with real Instagram/phone contact details) but had no actual `Sponsor` database record, so it wasn't flowing into the programme, ticker, or dashboard like a real sponsor. Created one (`contributor_id` linked to Paul Mooney), matching the `pitch` sponsorship type used for the other banner sponsors. No logo file has been supplied for it yet, so it won't appear in the site-wide sponsor strip until one is.
 
+## 2026-09-08 (continued) — Three domains in play; public website and staff app to be kept on separate addresses
+
+Working through getting the public website live surfaced three different domains, confirmed one at a time rather than assumed:
+
+1. **grindonbroadwayover40s.org** — bought "this morning," per Paul. Confirmed via DNS: still sitting untouched on IONOS's default parking page, not connected to anything.
+2. **grindonbroadwayover40s.com** — already connected as a Base44 custom domain from before this session. After Paul published the app in the Base44 dashboard, this domain went live and now correctly serves the app (confirmed via HTTP checks from the Base44 sandbox: both `/` and `/public` return 200 with the real app shell, not an error or parking page).
+3. **grindonboardinnover40s.co.uk** — registered today (confirmed via Paul's IONOS registration confirmation email, customer number 316388145). Paul explicitly confirmed: **this is the domain to use for the public website.**
+
+Paul's stated requirement: **the public website and the staff/player app must be on separate addresses** — the website is for the general public, the app is for players and staff. Plan agreed: connect `grindonboardinnover40s.co.uk` in Base44 as an additional custom domain for the public site; the existing address stays as the staff/player app's home. Domain connection itself (Base44 dashboard + IONOS DNS records) is Paul's own action — Claude has no tool access to either dashboard.
+
+**Open question, not yet resolved:** whether the existing `/` → `/public` anonymous-visitor redirect (added 2026-09-08 as a launch-blocker fix) should stay in place on the staff-facing domain too, or be limited to the new public domain only, so a logged-out visitor typing the staff domain sees a login screen rather than the public homepage. Needs Paul's answer before any routing code changes.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

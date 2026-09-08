@@ -33,6 +33,8 @@
 | Daz Cliff | `6a362b0234d01f9e95620920` | SUB | Cliffy |
 | Mick Greenwell | `6a38ca0a21cb430084f8f8b9` | SUB | — (also the FA-upload recipient/contact and a committee member — Player Registrations, per the club programme) |
 | Rob Kelly | `6a38ca0a21cb430084f8f8bb` | SUB | Rob |
+| Dave Taylor | `6a362b0234d01f9e95620921` | DEF, shirt #4 | Disco | Confirmed via direct query 2026-09-08, matches a real player-card graphic Paul sent exactly (position, shirt number). |
+| Anth Holmes | `6a38ca0a21cb430084f8f8b3` | FWD, shirt #17 | Holmsey | Confirmed via direct query 2026-09-08, matches a real player-card graphic Paul sent exactly. |
 
 ## Known duplicate/stray records (investigated, resolved, left as-is)
 

@@ -99,6 +99,14 @@ Paul registered `grindonboardinn40s.co.uk` via IONOS (plus `.com` and `.info` in
 
 **Practical answer given to Paul:** the fastest real path is the one the app already provides — open the Sponsor record in the app's own admin screen (Sponsor edit modal) and use its existing logo upload field directly; it uses the exact same underlying API. Claude verifies the result afterward.
 
+## 2026-09-08 (continued) — Sponsor logos linked via git-hosted files; UCS Renewables and Amber's Legacy confirmed as the "main" sponsors
+
+Paul re-sent the 5 logo files, this time as local file attachments rather than inline chat images — which let Claude commit them straight into this repo (`assets/sponsor-logos/`) and link each Sponsor's `logo_url` to a `raw.githubusercontent.com` URL, without the network/cost/capability problems hit in the previous attempt. All 5 confirmed live: SafeSwitch Solutions, DKJ Joinery, David Graham Roofing, UCS Renewables, GKB Financial Planning.
+
+Paul then sent UCS Renewables' official logo separately and said "these are our main sponsors... we've just received our sponsorship money from them so we need to have these plastered all over the website... predominant on every page." Checked the Sponsor entity's own `priority` field rather than guessing which records this applied to: only **UCS Renewables** and **Amber's Legacy** are flagged `priority: 'main'` — everyone else (SafeSwitch, DKJ, David Graham Roofing, GKB, Board Inn East Herrington) is `standard`. Built the sitewide placement (`MainSponsorStrip.jsx`) to follow that existing flag rather than hardcoding sponsor names, so it stays correct automatically if Paul changes a sponsor's priority in future.
+
+**Caveat given to Paul:** these logos are hosted from git, not Base44's own media storage like every other image in the app — functional and stable, but not the permanent "native" home. Recommended he re-upload the same files via the app's own Sponsor edit screen when convenient.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

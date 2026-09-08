@@ -213,3 +213,16 @@ Paul asked why the sponsor logos he'd sent multiple times still weren't connecte
 **Tested:** `npm run build` clean.
 **Checkpoint:** `6a9fbc148d846c9609c31adb` / commit `ac7c3ad3cbaeb9ddd576dc6d7b66bfa7463247b5` (the function was disabled in the same session it was created — no separate checkpoint exists for the live version).
 **Practical outcome:** fastest real path remains Paul uploading directly via the Sponsor edit modal already in the app (same underlying upload API) — Claude will verify each result once uploaded.
+
+## 2026-09-08 (continued) — Found a working route for the real sponsor logos; added a site-wide Main Sponsors strip
+
+Paul re-sent all 5 logo files as chat attachments (SafeSwitch Solutions, DKJ Joinery, David Graham Roofing, UCS Renewables, GKB Financial Planning) plus, separately, UCS Renewables' official logo. This time the images arrived as local files on disk rather than inline chat text, which opened up a route that avoids every blocker hit earlier: `git` reads a file's bytes straight off disk to build a commit — it never needs the content typed out as a tool-call parameter, so there was no base64-through-the-conversation cost this time.
+
+Committed the 5 logo files to this repo under `assets/sponsor-logos/` (this repo's default branch) and set each Sponsor record's `logo_url` to its stable `raw.githubusercontent.com` URL. Confirmed each one resolves to real image bytes before relying on it. Replaced the UCS Renewables file with the official version Paul sent afterwards, and added a `-mark` variant (the square icon-only version) alongside it.
+
+Paul also asked for the main sponsors to be "plastered... predominant on every page" now that sponsorship money has come in. Built `src/components/layout/MainSponsorStrip.jsx` — a new site-wide strip rendered in `PublicWebLayout.jsx` directly under the header, so it appears on every public page without per-page duplication. It reads sponsors via the existing `getPublicSponsorData` function (never the raw entity) and shows only those flagged `priority: 'main'` — currently UCS Renewables and Amber's Legacy, the only two Sponsor records carrying that flag. Also replaced the GKB Financial Planning "premium sponsor" card on `/public/sponsors`, which had been rendering a fake text-based logo, with the real uploaded image now that one exists.
+
+**Caveat told to Paul directly:** these 5 logos are hosted from this git repo, not from Base44's own media storage (`media.base44.com`) like every other image already in the app. It works and the URL is stable (it's the repo's default branch), but it isn't the "native" long-term home for these files — the cleaner fix, whenever convenient, is Paul re-uploading the same files via the app's own Sponsor edit screen, at which point `logo_url` gets switched to the permanent Base44-hosted copy.
+
+**Tested:** `npm run build` clean.
+**Checkpoint:** `6a9fc1d0b494fa3e99c93919`.

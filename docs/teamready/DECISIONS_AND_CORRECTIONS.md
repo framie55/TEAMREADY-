@@ -149,6 +149,18 @@ Once `grindonboardinnover40s.co.uk` finished DNS/SSL propagation, Paul opened it
 **Checkpoint:** `6a9fe654ccf6a094673c8cd2`.
 **Lesson recorded:** a curl/HTTP-status check on a React SPA proves the server responded — it proves nothing about which screen a real visitor sees. Client-side routing behaviour needs either a real browser check (via Paul) or an explicit test of the actual condition the code branches on, not just "did the page return 200."
 
+## 2026-09-08 (continued) — Homepage hero uses an AI-generated squad image with real sponsor branding, by Paul's explicit and informed decision
+
+Paul sent an image to use as the homepage hero — a polished, professional-looking squad walkout shot with the club badge, real GKB Financial Planning and Amber's Legacy branding on the shirts, taglines and CTA buttons baked in. Before using it, checked the file's embedded metadata rather than trusting how it looked: it carries a cryptographically signed C2PA content-provenance manifest from **OpenAI's image service**, confirming it's AI-generated — not a real photograph of real players.
+
+Flagged this to Paul directly, twice, with the specific concern spelled out: the image places two real sponsors' branding (one of them, Amber's Legacy, a memorial charity — see the earlier entry above) on fabricated, non-existent players, without those sponsors having agreed to that use. Offered an alternative (same composition, no real branding on the shirts) as a lower-risk option.
+
+**Paul's response, twice, explicit:** he wants the image used exactly as sent, sponsor logos and all — his reasoning being that the sponsorship itself is completely real (GKB and Amber's Legacy genuinely do sponsor the club), so the image is not making a false claim about who sponsors the club, only using a synthetic rendering technique instead of a camera. This is his call to make about his own club's marketing, and it was made with full knowledge that the image is AI-generated — that was the material fact Claude was responsible for surfacing, and it was surfaced clearly before this was actioned.
+
+**Implemented:** `PublicHome.jsx` hero now displays this image directly (natural aspect ratio, not cropped) with two invisible clickable link overlays positioned over the image's own "View Fixtures" and "Join Our Journey" buttons, since the image already contains that text — no duplicate heading/CTA text was added on top.
+
+**For any future session:** this hero image is confirmed AI-generated, not a real photo — do not describe it to Paul or anyone else as a genuine photograph, and do not re-raise this as an unresolved concern; it was raised, heard, and explicitly decided. If Paul supplies a real matchday or squad photo later, swapping it into this same hero slot is a one-line change (see the image `src` in `PublicHome.jsx`) — worth offering, not worth insisting on.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

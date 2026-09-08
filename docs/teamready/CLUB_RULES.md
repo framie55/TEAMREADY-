@@ -31,8 +31,23 @@ A correction from Paul overrides any earlier assumption, generated answer, or un
 
 ## Sponsors vs. charity partners — not the same thing
 
-- **Commercial sponsors** (`Sponsor.sponsorship_type` = `kit`, `pitch`, `general`, `main_club`, etc.) give the club money in exchange for exposure. `priority: 'main'` on these marks the sponsor giving the most, and drives the site-wide "Main Club Sponsor" prominence.
+- **Commercial sponsors** (`Sponsor.sponsorship_type` = `kit`, `pitch`, `general`, `main_club`, etc.) give the club money or products/services in exchange for exposure. `priority: 'main'` on these marks the sponsor giving the most, and drives the site-wide "Main Club Sponsor" prominence.
 - **Amber's Legacy** (`sponsorship_type: 'charity_partner'`) is different in kind, not just degree: it's a cervical cancer charity set up in memory of the daughter of Daz Cliff (Darren Cliff — "Cliffy" in the nickname table above), a player at the club. The club promotes it to support Daz and the cause, not for any commercial or promotional benefit. It carries `priority: 'main'` in the database for historical reasons, but must never be ranked, sized, or reported alongside paid sponsors as if it were one — it has its own dedicated placement (the About page) and stays out of any "who's paying the most" sponsor hierarchy.
+
+## Most sponsors here are in-kind, not cash — and several are player-owned businesses
+
+Confirmed directly by Paul (2026-09-08) — don't assume "sponsor" means a cash payment for exposure:
+
+| Sponsor | Real relationship | `contributor_id` |
+|---|---|---|
+| **SafeSwitch Solutions** | Paul's own business. He personally covers costs — producing the matchday programme, club printing, team sweatshirts — rather than paying the club a sponsorship fee. | Paul Frame (`6a362b0234d01f9e9562091a`) |
+| **GKB Financial Planning** | Owned by player Gareth Brazier ("Gash"). No cash changes hands; he buys the club's kit (polo shirts). `sponsorship_type` corrected from `general` to `kit` to match. | Gareth Brazier (`6a3d9d2ba00bf08738369af3`) |
+| **David Graham Roofing** | Owned by player David Graham. Paying for a pitchside banner. | David Graham (`6a5bd695e42bb914bb55bb2b`) |
+| **DKJ Joinery** | Owned by Chris Johnson, who is **not yet a player** — signing for the club in December once he turns 40 (O40s league eligibility). Paying for a pitchside banner. **Do not create a `Player` record for him before he actually signs** — this is a future-signing fact, not a request to add him to the roster. **Do not publish his future signing on any public page** — a sponsor thank-you is not the venue for a transfer announcement; that's Paul's call to make separately. | *(left blank — not yet a player)* |
+| **The FNF Method** | Owned/led by player Paul Mooney. Paying for a pitchside banner — same as DKJ and David Graham Roofing. Previously only existed as a hardcoded card on `/public/sponsors`; created as a real `Sponsor` record 2026-09-08 so it flows through the programme, ticker and dashboard like every other sponsor. No logo file supplied yet — `logo_url` is null, so it won't appear in the site-wide sponsor strip (which requires a logo) until one is added. | Paul Mooney (`6a3d9abb01fca3df025bf8ed`) |
+| **UCS Renewables** | The one genuine external cash sponsor among these, and the club's main sponsor by contribution — see the priority section above. | *(none — not player-owned)* |
+
+`thank_you_message` on each of the first four was rewritten 2026-09-08 to reflect this accurately (what they actually gave, not generic "for their support" text) — check there before assuming a description needs changing again.
 
 ## Terminology
 

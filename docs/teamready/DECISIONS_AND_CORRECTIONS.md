@@ -111,6 +111,19 @@ Paul then sent UCS Renewables' official logo separately and said "these are our 
 
 Paul confirmed the reasoning behind keeping Amber's Legacy out of the new commercial "main sponsor" hierarchy was correct, and gave the real context: Amber's Legacy is a cervical cancer charity set up in memory of the daughter of Daz Cliff (Darren Cliff), a player at the club. The club promotes it to support Daz and the cause — not for any financial or promotional benefit. Recorded permanently in `CLUB_RULES.md` under a new "Sponsors vs. charity partners" section so this is never mistaken for a commercial arrangement, never reported alongside paid sponsor revenue, and never moved out of its own dedicated spot on the About page.
 
+## 2026-09-08 (continued) — Most sponsors are in-kind and player-owned, not cash
+
+Paul explained the real nature of each sponsor, correcting an unstated assumption that they were arms-length businesses paying the club cash:
+
+- **SafeSwitch Solutions** is Paul's own business — he personally funds the matchday programme's production, printing and team sweatshirts rather than paying the club a fee.
+- **GKB Financial Planning** is owned by player Gareth Brazier ("Gash") — he buys the club's kit (polo shirts), no cash sponsorship. Corrected `sponsorship_type` from `general` to `kit` to match.
+- **David Graham Roofing** is owned by player David Graham — paying for a pitchside banner.
+- **DKJ Joinery** is owned by Chris Johnson, who is **not yet a player** — he's signing for the club in December once he turns 40 (O40s league eligibility). He's paying for a pitchside banner. **No `Player` record created** — he isn't a player yet, and this is not a request to add him. **His future signing was not published anywhere public** — a sponsor thank-you isn't the venue for a transfer announcement.
+
+Verified each named player against real records before writing anything (golden rule): Gareth Brazier and David Graham both confirmed as existing active `Player` records; Chris Johnson confirmed absent, as expected. Linked `contributor_id` on GKB and David Graham Roofing to the correct player IDs. Rewrote all four `thank_you_message` fields to describe what was actually given, replacing generic placeholder text. Full detail in `CLUB_RULES.md`.
+
+Immediately afterward, Paul added: **Paul Mooney** (an active player, confirmed) also owns **The FNF Method**, and will be paying for a pitchside banner like DKJ/David Graham Roofing. The FNF Method already existed as a hardcoded showcase card on `/public/sponsors` (with real Instagram/phone contact details) but had no actual `Sponsor` database record, so it wasn't flowing into the programme, ticker, or dashboard like a real sponsor. Created one (`contributor_id` linked to Paul Mooney), matching the `pitch` sponsorship type used for the other banner sponsors. No logo file has been supplied for it yet, so it won't appear in the site-wide sponsor strip until one is.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

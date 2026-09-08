@@ -137,6 +137,18 @@ Paul's stated requirement: **the public website and the staff/player app must be
 **Resolved:** Paul confirmed keep the existing `/` → `/public` redirect everywhere (option A) — "I don't want the public to have a login, it's a public site." Acted on the stated reasoning, not just the letter of the choice: removed the "Team Login" button from the public site's header entirely (`PublicWebLayout.jsx`) so no login prompt is visible anywhere on the public-facing pages. `/login` itself is untouched and still reachable directly by URL — this only removes the visible link from public pages. Build verified clean.
 **Checkpoint:** `6a9fda9b410ca379978c5b14`.
 
+## 2026-09-08 (continued) — The earlier `/` → `/public` redirect fix was never actually verified, and had a real bug
+
+Once `grindonboardinnover40s.co.uk` finished DNS/SSL propagation, Paul opened it in a real browser and got the Manager/Player **login screen** at the bare root — not the public homepage. This exposed that the original launch-blocker fix (logged earlier as "Fixed" in `KNOWN_ISSUES.md` #34) had only ever been checked via `curl` from the Base44 sandbox, which can only see HTTP status codes — it cannot observe client-side React routing behaviour. The fix looked plausible and was reported as working without ever being confirmed in an actual browser. That was a real gap in how it was tested, not just an edge case.
+
+**Root cause found in `src/lib/AuthContext.jsx`:** `authError.type` is only ever set to `'auth_required'` when the app's public-settings check returns an HTTP 403 — which only happens when the app's Base44 "App Visibility" setting is **Private**. This app's visibility is set to **Public** (confirmed from the Base44 dashboard screenshot Paul sent), so for an anonymous visitor that check succeeds with a 200, `authError` stays `null` the whole time, and the old redirect logic (nested inside `if (authError) { ... }`) never ran at all. Execution fell through to the normal `<Routes>`, where `/` sits behind `ProtectedRoute`, which client-side-redirected an unauthenticated visitor straight to `/login`.
+
+**Fix:** moved the `/` → `/public` redirect in `src/App.jsx` out from under the `authError` check entirely, keying it directly on `isAuthenticated` (already provided by `AuthContext`) instead. This covers both cases correctly — an anonymous visitor on this Public-visibility app (no authError ever set) and, unchanged, an anonymous visitor on a hypothetically Private-visibility app (`authError.type === 'auth_required'`) — since in both cases `isAuthenticated` is `false`. A genuinely logged-in staff member still reaches their Dashboard at `/` exactly as before, since `isAuthenticated` is `true` for them.
+
+**Tested:** `npm run build` clean. Root cause traced by reading the actual auth-check source rather than guessing.
+**Checkpoint:** `6a9fe654ccf6a094673c8cd2`.
+**Lesson recorded:** a curl/HTTP-status check on a React SPA proves the server responded — it proves nothing about which screen a real visitor sees. Client-side routing behaviour needs either a real browser check (via Paul) or an explicit test of the actual condition the code branches on, not just "did the page return 200."
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

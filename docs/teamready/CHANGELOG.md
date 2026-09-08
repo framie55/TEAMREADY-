@@ -239,3 +239,15 @@ Also added a dedicated "Main Club Sponsor" premium card for UCS Renewables at th
 
 **Tested:** `npm run build` clean.
 **Checkpoint:** `6a9fc918822cbd2ac754608d`.
+
+## 2026-09-08 (continued) — The public website is live at its own domain: grindonboardinnover40s.co.uk
+
+Walked Paul through the full go-live process end to end, live, over several screenshots: publishing the app in Base44 (previously never done — `teamready.base44.app` had been returning "App not found" the whole time), connecting the new `grindonboardinnover40s.co.uk` domain (registered today at IONOS) via Base44's built-in IONOS domain-connect flow, and waiting out DNS/SSL propagation.
+
+Along the way, removed the "Team Login" button from the public site's header (Paul: "I don't want the public to have a login, it's a public site"), and found and fixed a real bug in the root-path redirect from the earlier launch-blocker fix — see the two entries in `DECISIONS_AND_CORRECTIONS.md` for full detail on both.
+
+**Confirmed live and correct** by Paul opening `https://grindonboardinnover40s.co.uk/` in Safari on his phone: club badge, the new "Main Club Sponsor" strip showing UCS Renewables prominently with the four minor sponsors smaller alongside, no login screen anywhere, "View Fixtures" / "Meet the Squad" buttons. Verified server-side too — the live JS bundle hash matches the latest build.
+
+The player/staff app is unaffected and unchanged — same login (Name + PIN for players, email/password/Google for managers), same address as before.
+
+**Checkpoints across this piece of work:** `6a9fda9b410ca379978c5b14` (login button removed), `6a9fe654ccf6a094673c8cd2` (redirect bug fix).

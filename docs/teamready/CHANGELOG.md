@@ -177,3 +177,17 @@ Built `src/pages/public/PublicAbout.jsx` (route `/public/about`, added to the pu
 **Tested:** `npm run build` clean; targeted `eslint` on all 3 changed files — 2 pre-existing unused-import errors in `PublicContact.jsx` (present before this change, unrelated to the edits made), nothing new introduced.
 **Checkpoint:** `6a9fb67c3dfdff2f8dc236cb` / commit `bb9a03aaa41e737515a730bb70d1f105e51ac529`.
 **Public website build is now feature-complete against Paul's original 12-page spec** except: Match Reports archive (needs a publish/approval step first), Programme Archive (blocked, no real programme data in-app).
+
+## 2026-09-08 (continued) — Added a human review step before match reports go public
+
+`MatchReport.jsx`'s single "Publish Match Report" button used to save the match result AND instantly post the write-up to the public news feed in one click, with zero review step — directly conflicting with CLAUDE.md's rule "never let a match go official... without a human having looked at it."
+
+**Split into two explicit steps:**
+1. **"Save Match Result"** — unchanged behaviour: marks the fixture completed with the score, credits the manager's MOTM pick, creates the ticker event. This stays instant, since Paul is directly entering it himself in the form — he's already the human reviewer for that part.
+2. **New: a review panel** appears after saving, showing exactly what will be posted to the public news feed in an editable textarea (so Paul can tweak wording before it goes live), with its own separate **"Publish to Website"** button. Nothing reaches `ClubNews` — and therefore nothing reaches the public site — until that second button is explicitly clicked.
+
+No database schema change was needed — the draft report text lives only in the page's own React state until published, so there's no risk of stray unpublished draft records accumulating in the database either.
+
+**Tested:** `npm run build` clean; targeted `eslint` — one pre-existing unused import (`Plus`, present before this change, unrelated to the edits made) left alone.
+**Checkpoint:** `6a9fb84909306835db38b10e` / commit `007666ef3b75628aa8d3a42cfb324877d8c60b8b`.
+**Still open:** the AI-generated match analysis (`generateMatchReportAi`, Known Issues #8) is a separate feature and still auto-writes with no approval gate — not touched by this change.

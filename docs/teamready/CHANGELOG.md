@@ -114,3 +114,11 @@ Paul supplied a full homepage mockup (desktop + mobile). Rebuilt `src/pages/publ
 **Tested:** `npm run build` clean; targeted `eslint` on both changed/new files clean (one pre-existing unused `loading` state variable, present before this change, left alone).
 **Checkpoint:** `6a9faa1bca15293b492be5b2` / commit `49d7b81678135dfde8b01ca8e61017b1f032e2cb`.
 **Not yet built:** dedicated News and Programmes list pages (the mockup's nav shows these; current nav still only has Home/Fixtures/Squad/Sponsors/LMS/Contact) — flagged to Paul as a separate decision rather than built speculatively.
+
+## 2026-09-08 (continued) — Fixed the remaining public Sponsor data exposure
+
+At Paul's request ("fix the sponsor pages too"), extended the `getPublicSponsorData` fix to the other two genuinely public pages that read `Sponsor` directly: `src/pages/public/PublicSponsors.jsx` and `src/pages/supporter/SupporterSponsors.jsx`. Added `offer_description` to the function's whitelist (used by `SupporterSponsors.jsx`, another undeclared-schema field, but one that's meant to be shown publicly).
+
+**Checked before touching anything:** the other pages that read `Sponsor` (`Sponsors.jsx`, `Dashboard.jsx`'s `SponsorStrip`, `LmsWinner.jsx`, `media/SponsorGraphics.jsx`) all sit behind `ProtectedRoute`+`AdminGuard` in `App.jsx` — staff-only, and they legitimately need the full record (address/phone/email) to manage sponsors. Correctly left those reading the entity directly rather than breaking admin functionality by over-applying the fix. Known Issues #32 updated to reflect full scope.
+**Tested:** `npm run build` clean; targeted `eslint` on all 3 changed/touched files clean.
+**Checkpoint:** `6a9fabc4e8b60b4d7cfed0b5` / commit `45773a44df6aaea580337705b8e3aa2cffe1bf4c`.

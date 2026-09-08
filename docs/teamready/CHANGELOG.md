@@ -122,3 +122,13 @@ At Paul's request ("fix the sponsor pages too"), extended the `getPublicSponsorD
 **Checked before touching anything:** the other pages that read `Sponsor` (`Sponsors.jsx`, `Dashboard.jsx`'s `SponsorStrip`, `LmsWinner.jsx`, `media/SponsorGraphics.jsx`) all sit behind `ProtectedRoute`+`AdminGuard` in `App.jsx` — staff-only, and they legitimately need the full record (address/phone/email) to manage sponsors. Correctly left those reading the entity directly rather than breaking admin functionality by over-applying the fix. Known Issues #32 updated to reflect full scope.
 **Tested:** `npm run build` clean; targeted `eslint` on all 3 changed/touched files clean.
 **Checkpoint:** `6a9fabc4e8b60b4d7cfed0b5` / commit `45773a44df6aaea580337705b8e3aa2cffe1bf4c`.
+
+## 2026-09-08 (continued) — Added the public League Table page
+
+Built `src/pages/public/PublicLeagueTable.jsx` (route `/public/table`, added to the public nav in `PublicWebLayout.jsx`, linked from the homepage's Latest Result section) — one of the 12 required public page types from Paul's original spec that hadn't been built yet.
+
+Reads `LeagueTable` directly (no whitelist function needed — the entity holds only team names/results, nothing private, unlike `Player`/`Sponsor`). Shows the real, already-verified 13-team table (Grindon's own row highlighted), with GF/GA shown as "–" where the league's own site never published a split (documented in `DATABASE_MAP.md`/earlier changelog entries — most rows only have goal difference, not for/against).
+
+**Tested:** `npm run build` clean; targeted `eslint` on all 4 changed/new files clean (one pre-existing unused `loading` variable, unrelated to this change).
+**Checkpoint:** `6a9faffba74efed9db81065e` / commit `10d7f99545bfb64fbd0dca4f4c271ae057dc2837`.
+**Still not built from the original 12-page spec:** Match Centre (already exists as `SupporterMatchCentre.jsx`, not yet linked from `/public/*` nav), dedicated Player Profile pages (squad page shows cards only, no individual profile URLs), News archive, Match Reports archive, Programme Archive (blocked — no real programme data in the app), dedicated Sponsorship pitch page (current `/public/sponsors` is a directory, not a "become a sponsor" pitch page), Club Information/About page, Contact page (exists, `PublicContact.jsx`, already built).

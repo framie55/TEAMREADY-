@@ -29,6 +29,11 @@ A correction from Paul overrides any earlier assumption, generated answer, or un
 - Never use a destructive git/database operation.
 - Never expose secrets or credentials in code, docs, or commits. If access to a service is needed, name which service — never ask Paul to paste a password or API key into chat.
 
+## Sponsors vs. charity partners — not the same thing
+
+- **Commercial sponsors** (`Sponsor.sponsorship_type` = `kit`, `pitch`, `general`, `main_club`, etc.) give the club money in exchange for exposure. `priority: 'main'` on these marks the sponsor giving the most, and drives the site-wide "Main Club Sponsor" prominence.
+- **Amber's Legacy** (`sponsorship_type: 'charity_partner'`) is different in kind, not just degree: it's a cervical cancer charity set up in memory of the daughter of Daz Cliff (Darren Cliff — "Cliffy" in the nickname table above), a player at the club. The club promotes it to support Daz and the cause, not for any commercial or promotional benefit. It carries `priority: 'main'` in the database for historical reasons, but must never be ranked, sized, or reported alongside paid sponsors as if it were one — it has its own dedicated placement (the About page) and stays out of any "who's paying the most" sponsor hierarchy.
+
 ## Terminology
 
 - **O40s** = Over 40s (the age category this entire league/club is built around).

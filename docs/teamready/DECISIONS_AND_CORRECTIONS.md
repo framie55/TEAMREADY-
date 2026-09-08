@@ -107,6 +107,10 @@ Paul then sent UCS Renewables' official logo separately and said "these are our 
 
 **Caveat given to Paul:** these logos are hosted from git, not Base44's own media storage like every other image in the app — functional and stable, but not the permanent "native" home. Recommended he re-upload the same files via the app's own Sponsor edit screen when convenient.
 
+## 2026-09-08 (continued) — Amber's Legacy confirmed as a charity tribute, not a commercial sponsor
+
+Paul confirmed the reasoning behind keeping Amber's Legacy out of the new commercial "main sponsor" hierarchy was correct, and gave the real context: Amber's Legacy is a cervical cancer charity set up in memory of the daughter of Daz Cliff (Darren Cliff), a player at the club. The club promotes it to support Daz and the cause — not for any financial or promotional benefit. Recorded permanently in `CLUB_RULES.md` under a new "Sponsors vs. charity partners" section so this is never mistaken for a commercial arrangement, never reported alongside paid sponsor revenue, and never moved out of its own dedicated spot on the About page.
+
 ## Pending — not yet confirmed by Paul
 
 - **Programme "Results This Season" mix-up root cause** (Known Issues #25) — whether this is a recurring generation bug or a one-off manual slip.

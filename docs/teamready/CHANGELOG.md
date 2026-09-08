@@ -132,3 +132,12 @@ Reads `LeagueTable` directly (no whitelist function needed — the entity holds 
 **Tested:** `npm run build` clean; targeted `eslint` on all 4 changed/new files clean (one pre-existing unused `loading` variable, unrelated to this change).
 **Checkpoint:** `6a9faffba74efed9db81065e` / commit `10d7f99545bfb64fbd0dca4f4c271ae057dc2837`.
 **Still not built from the original 12-page spec:** Match Centre (already exists as `SupporterMatchCentre.jsx`, not yet linked from `/public/*` nav), dedicated Player Profile pages (squad page shows cards only, no individual profile URLs), News archive, Match Reports archive, Programme Archive (blocked — no real programme data in the app), dedicated Sponsorship pitch page (current `/public/sponsors` is a directory, not a "become a sponsor" pitch page), Club Information/About page, Contact page (exists, `PublicContact.jsx`, already built).
+
+## 2026-09-08 (continued) — Match Centre confirmed already reachable; added individual player profile pages
+
+**Match Centre:** checked before building anything — `SupporterHome.jsx` (the Supporter zone's own landing page, reached via the "⚽ Fans" nav link) already has a quick-link tile straight to `/supporter/match-centre`, alongside Fixtures/Squad/Stats/Gallery/Sponsors. Nothing needed here; removed from the to-build list.
+
+**Player profiles:** built `src/pages/public/PublicPlayerProfile.jsx` (route `/public/player/:id`) — confirmed no player-profile page existed anywhere in the app before this, not even an admin one. Uses the same `getPublicPlayerData` whitelisted function as the squad grid (never a direct `Player` read). Shows photo, position, shirt number, nickname, previous club, and the full safe season-stats set (apps, goals, assists, cards, both MOTM counters). Each card on `PublicSquad.jsx` now links to its player's profile page.
+
+**Tested:** `npm run build` clean; targeted `eslint` on both changed/new files clean, zero warnings.
+**Checkpoint:** `6a9fb18dc9c35a7259dc2b8b` / commit `ad803b512094edbd69351f003078a2e65ba2fd62`.

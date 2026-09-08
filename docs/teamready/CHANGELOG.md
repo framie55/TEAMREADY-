@@ -102,3 +102,15 @@ Paul also sent a full homepage mockup (desktop + mobile) matching the existing g
 **Database records affected:** `Club` `6a38094e4d090aec62268573` (`badge_url`, `name`) — data-only change, no code touched.
 
 Added two players confirmed via direct database query against real player-card graphics Paul sent — Dave Taylor ("Disco," DEF #4) and Anth Holmes ("Holmsey," FWD #17) — to `PLAYER_IDENTITY_REGISTER.md`. Both were already correct, real, active records; the register was just incomplete.
+
+## 2026-09-08 — Public website: rebuilt the homepage to match Paul's supplied mockup
+
+Paul supplied a full homepage mockup (desktop + mobile). Rebuilt `src/pages/public/PublicHome.jsx` to match it, extending the existing page rather than creating a new one:
+
+- **New sections:** Latest Result banner (real most recent completed fixture, win/loss/draw colour-coded), "Meet the Squad" spotlight (dynamically features the current top scorer — no player hardcoded, updates automatically as stats change), "Programmes" panel (static "pick up at the match" messaging — no real programme PDF exists in the app yet, so nothing was invented or linked).
+- **Security fix applied proactively:** found that `Sponsor` records carry undeclared fields beyond the formal schema (address, contact_name, phone, email, contract_notes) — the same category of issue just fixed for `Player`. Built `getPublicSponsorData` (same whitelist pattern as `getPublicPlayerData`) and routed the sponsor strip through it instead of a direct `base44.entities.Sponsor.filter()` call, rather than building new code on top of a known-bad pattern.
+- Domain name (`grindonboardinn40s.co.uk`, registered via IONOS) logged — not connected to anything; Paul was advised to leave the domain's DNS/connection settings untouched until the site is ready and he explicitly approves going live.
+
+**Tested:** `npm run build` clean; targeted `eslint` on both changed/new files clean (one pre-existing unused `loading` state variable, present before this change, left alone).
+**Checkpoint:** `6a9faa1bca15293b492be5b2` / commit `49d7b81678135dfde8b01ca8e61017b1f032e2cb`.
+**Not yet built:** dedicated News and Programmes list pages (the mockup's nav shows these; current nav still only has Home/Fixtures/Squad/Sponsors/LMS/Contact) — flagged to Paul as a separate decision rather than built speculatively.

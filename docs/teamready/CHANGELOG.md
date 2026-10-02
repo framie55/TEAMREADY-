@@ -297,3 +297,19 @@ Also noted in passing: `PublicWebLayout.jsx`'s header structure has changed sinc
 
 **Tested:** `npm run build` clean; `eslint` clean on both changed files (pre-existing unrelated warnings in `Login.jsx` untouched).
 **Checkpoint:** `6aa033e72f59ef94088153e6`.
+
+## 2026-10-02 — Animated goal celebration clips added to 8 player profiles
+
+Paul asked for the finished BISN goal celebration clips (9:16 Reel, AI-animated celebration + the player's own sponsor panel + main club sponsors) to be on each player's profile.
+
+**Data:** new `Player` fields `celebrationVideo` and `celebrationVideoCover` (left the existing `celebrationImage` poster untouched — Wake and Griffo already had uploaded posters). Set by record id only, verified against the identity register:
+Billy Harrison `…f8b5`, Gareth "Gash" Brazier `6a3d9d2ba00bf08738369af3`, Daz "Cliffy" Cliff `…0920`, Stevie "Ando" Anderson `…f8b8`, Rob Kelly `…f8bb`, Paul "Griffo" Griffiths (outfield) `…092b` — NOT Griff the keeper, Garry Wake `…0927`, Darren "Daz" George `6a5ccb32342953ffc811dba3`.
+
+**Files:** clips + covers hosted in the app at `public/goal-celebrations/GOAL_<key>_celebration(.mp4|_cover.jpg)` (pulled from this repo's `assets/goal-celebrations/`).
+
+**Code:** new `src/components/celebrations/CelebrationVideo.jsx` (muted autoplay loop, controls, cover poster). Shown on: public player profile (`PublicPlayerProfile.jsx`), player portal Goal Celebrations page (`PlayerCelebrations.jsx`), admin Edit Player modal, and the admin Goal Celebrations grid (video preferred over poster). `getPublicPlayerData` and `getPlayerPortalData` now whitelist the two fields (public marketing content — deliberately safe to publish).
+
+**Not changed:** the live-match goal card (`CelebrationQueue`) still uses the poster/type — playing the clip on a live goal is a possible next step.
+
+**Tested:** `npm run build` clean; eslint clean on changed files (one pre-existing unused `Camera` import in GoalCelebrations.jsx untouched); dev server serves `/goal-celebrations/*` 200.
+**Checkpoints:** before `6abf84394e42b7f05d42153c`, after `6abf8992b0d72a669b296fea`.

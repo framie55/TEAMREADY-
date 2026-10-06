@@ -369,3 +369,9 @@ Added 4 more correctly-located prospects: Victoria Nail & Beauty (Houghton-le-Sp
 ## 2026-10-06 (continued) — 3 more SponsorLead prospects; running low on distinct new categories in this catchment
 
 Added 3 more: Sunderland Locksmith Services, Stoneygate Stables Kennels & Cattery, Mobile Chiropodist James R Wilson (all SR3/Houghton-le-Spring). `SponsorLead` total now 40 of the ~50 target, none contacted yet. Getting harder to find further distinct, verifiable independent businesses strictly within the named catchment (East/Middle Herrington, Farringdon, Silksworth, Shiney Row, Houghton-le-Spring, Grindon) without either repeating a category already covered or reaching into adjacent postcodes (e.g. DH5/Hetton-le-Hole) Paul didn't name — flagged to Paul rather than quietly widening the search area.
+
+Separately, flagged to Paul that the cold `SponsorLead` list (found by Claude, no personal connection) will convert at low single digits if contacted by email, vs the ~80% hit rate his personal/player network has historically shown (48 sponsors, nearly all warm referrals) — recommended he prioritise his own network and a fixed Facebook connector over scaling the cold list to "thousands."
+
+## 2026-10-06 (continued) — First real conversion logged: Dawson Fencing and Landscaping Services
+
+Paul personally messaged a business (found via the club's own Facebook Page Messenger, not from Claude's list) and secured a verbal yes to a £60 pitchside banner in one conversation — sent a design mock-up and a Monzo payment link, same day. Confirms the "warm personal contact beats cold list" point directly. Logged as a new `SponsorLead` record, `pipeline_stage: "agreed"`, `ai_generated: false` (Paul's own find/contact, not Claude's), with the Monzo link and status noted — awaiting payment before the banner is printed and a full `Sponsor` record created.

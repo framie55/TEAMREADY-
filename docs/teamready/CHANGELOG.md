@@ -355,3 +355,9 @@ Added 8 more verified prospects, all genuinely close this time (several in East/
 **Flagged, not decided:** found two independent pubs nearby (The Dolphin, Farringdon; The Prior) that would normally be good prospects, but didn't add them — Board Inn East Herrington is the club's main/home pub sponsor, so approaching rival pubs could be awkward given that relationship. Left for Paul to decide whether pubs are fair game.
 
 `SponsorLead` total now 28 of the ~50 target, none contacted yet.
+
+## 2026-10-06 (continued) — 5 more SponsorLead prospects; pubs excluded per Paul's decision
+
+Paul confirmed: leave pubs out entirely (Board Inn East Herrington stays the club's one pub relationship), keep building the list. Added 5 more correctly-located prospects: Sunderland Dentists (East Herrington), The Florist Eleganza/The Florist Shiney Row, M I Dickson Ltd (butcher, Houghton-le-Spring), Aline Properties and Keyline Property (independent lettings, Silksworth). Skipped `mydentist` (national dental chain) and the larger multi-branch estate agents/solicitors found in the same searches (Peter Heron, Dowen Auctions, Thomas Watson, Stowe Family Law) as poor fits for a branch-level £60 ask.
+
+`SponsorLead` total now 33 of the ~50 target, none contacted yet.

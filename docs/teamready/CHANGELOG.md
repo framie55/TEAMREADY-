@@ -325,3 +325,15 @@ Paul wants to sell roughly 50 more pitchside banners (on top of the 48 already s
 **Not done:** none of these have been contacted — this is a prospect list, not confirmed sponsors. No code changed.
 
 **Correction same session:** Paul pointed out the first outreach draft undersold the package — £60 isn't just the banner, it's banner + weekly programme feature + Facebook/Instagram promotion + Player of the Match/goalscorer graphics + match day game sponsor rotation + all other season promotions + a website listing with a direct link (per his own sponsor flyer). Rewrote `outreach_message` on all 15 `SponsorLead` records via bulk `update_entities` to lead with the full value stack instead of just the banner.
+
+## 2026-10-06 (continued) — Resolved the three flagged dual-role sponsors on Paul's confirmation
+
+Paul confirmed: (1) pitch fencing does have room for the ~50 extra banners being sold, no capacity concern; (2) SafeSwitch Solutions stays as one record, just noted; (3) GKB gets a second dedicated banner record; (4) UCS Technologies and UCS Renewables are two separate businesses, not one.
+
+**Changes:**
+- `SafeSwitch Solutions` (`6a9f3299075e24e0b122223e`) — added a note to the existing record's `thank_you_message` about the x2 pitchside banners, rather than touching the separate hidden/inactive record (left alone, per Paul).
+- `UCS Renewables` (`6a9f3299075e24e0b122223b`) — noted it shares x2 pitchside banners with sister business UCS Technologies.
+- Created `GKB Financial Planning Limited` (`6ac49f386632f064eb0fbc5c`) — second record, `sponsorship_type: "pitch"`, reusing the existing logo/website/contributor, alongside the original `kit`-type record.
+- Created `UCS Technologies` (`6ac49f386632f064eb0fbc5d`) — new record, `sponsorship_type: "pitch"`, contact details (0845 901 1144, info@ucs-technologies.com) taken directly from their own paid banner, not guessed. No logo yet — the banner graphic combines both UCS brands, would need cropping/splitting if a separate logo is wanted later.
+
+Public sponsor pages will now show GKB and UCS Technologies in both their kit/banner sections correctly, instead of only one role each.

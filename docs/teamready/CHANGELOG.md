@@ -345,3 +345,13 @@ Paul tried using the app's "Facebook" button (Matchday Graphics Studio → `post
 Paul separately asked for two more Facebook-dependent things, both blocked by the same root cause (`facebook.com` is blocked by this environment's network egress proxy, confirmed via a direct `WebFetch` attempt on the Ad Library earlier): browsing local "Have Your Say"/selling Facebook groups to find businesses posting ads there, and sending Messenger contact to prospects directly. Neither is possible from this session — no browser/login tool reaches Facebook at all here. Explained the limitation plainly rather than attempting an unreliable workaround.
 
 Kept building the `SponsorLead` pipeline via the channel that does work (Yell.com-scoped search): added 5 more verified local prospects — The Jolly Fryer (fish & chip shop), Sure Vehicle Centre (car garage/MOT), Otax Ltd (accountant), Signs Express Wearside (signage/print — good synergy, they make banners themselves), Pennywell Honto Shin Karate Club. Skipped national chains found in the same searches (Halfords Autocentre) and two results with a suspicious duplicate phone number across different business names (Smith's Garage / Sunderland MOT Centre) rather than risk bad contact data. `SponsorLead` total now 20 of the ~50 target, none contacted yet.
+
+## 2026-10-06 (continued) — Corrected prospecting area to the ground's actual catchment; 8 more SponsorLead prospects
+
+Paul corrected the geography: the ground's real catchment is **East Herrington, Middle Herrington, Farringdon, Silksworth, Shiney Row and Houghton-le-Spring** (plus Grindon) — not generic "Sunderland SR4," which had pulled in some prospects (Pallion, Hylton Road area) further from the ground than ideal. Re-ran Yell.com searches scoped to the correct areas.
+
+Added 8 more verified prospects, all genuinely close this time (several in East/Middle Herrington and Silksworth, one on Durham Road itself near the Board Inn): Strawberry Rose (cafe), Nisa Local (convenience store), Chastons Pharmacy, Capella I.T Support & Solutions, Makins Mobile Tyres, Silk Hair & Beauty, J & H Local Super 7 (convenience store), Spicy China (Chinese takeaway, Houghton-le-Spring). Skipped national chains surfaced in the same searches (Tesco Express, Sainsbury's Cafe, Boots, Greggs, Co-Op Food, Morrisons Cafe).
+
+**Flagged, not decided:** found two independent pubs nearby (The Dolphin, Farringdon; The Prior) that would normally be good prospects, but didn't add them — Board Inn East Herrington is the club's main/home pub sponsor, so approaching rival pubs could be awkward given that relationship. Left for Paul to decide whether pubs are fair game.
+
+`SponsorLead` total now 28 of the ~50 target, none contacted yet.

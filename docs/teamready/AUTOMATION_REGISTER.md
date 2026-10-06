@@ -36,7 +36,8 @@ Every backend function is one folder under `base44/functions/*/entry.ts` (Deno.s
 - **Purpose:** the only trustworthy confirmation a Stripe payment succeeded — flips `Payment.status` to `paid`. Never treat a client-side "success" screen as proof; this webhook is the source of truth.
 
 ### postToFacebook
-- **Purpose:** real, connected Graph API post to the "Grindon Broadway 040s" Facebook page.
+- **Purpose:** Graph API post to the "Grindon Broadway 040s" Facebook page.
+- **Status (2026-10-06): connector expired, posting currently broken.** `facebook_pages` connector shows `status: "expired"` (connected 2026-07-12, never refreshed) — confirmed when Paul tried posting via Matchday Graphics Studio and it failed. Needs Paul to manually reconnect in the Base44 builder's Integrations settings (requires his Facebook login). See Known Issues #35.
 - **Approval required:** should always be treated as a real, visible publish action — confirm content before triggering.
 
 ## Still dependent on the discontinued Twilio account (not yet fixed, Known Issues #21)
@@ -49,7 +50,7 @@ Every backend function is one folder under `base44/functions/*/entry.ts` (Deno.s
 - **Stripe** — real checkout + webhook confirmation for LMS entries/buybacks and match fees.
 - **API-Football** (`lmsGetFixtures`) — real fixture data for LMS picks.
 - **Open-Meteo** (`fetchFixtureWeather`) — real, free, no key needed.
-- **Facebook Graph API** (`postToFacebook`) — real, connected.
+- **Facebook Graph API** (`postToFacebook`) — real, but connector currently **expired** (Known Issues #35), needs Paul to reconnect.
 
 ## Explicitly NOT real automation (common misconception worth documenting)
 

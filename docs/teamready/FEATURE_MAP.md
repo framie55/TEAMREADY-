@@ -23,7 +23,7 @@ For each feature: what it does, the main page(s), the real source-of-truth data,
 | Opposition scouting | `OppositionHub.jsx` and related, `OppositionRecord`/`OppositionFullTimeData` | Manually transcribed from FA opponent pages (screenshot workflow), then run through an "AI scout" feature | — | Manual data entry step confirmed unavoidable (same Cloudflare block) |
 | Reminders/comms | Real: Twilio SMS, OneSignal push. Not real: every "WhatsApp" feature is a `wa.me` link a human must tap send on | `notificationEngine`, `sendSms`, `sendPushNotification` | — | Twilio being phased out (cost) — see `AUTOMATION_REGISTER.md` |
 | Matchday Studio (public broadcast view) | `MatchdayStudio.jsx` | Reads `Fixture`, `MatchTimelineEvent`, `TeamSheet`/`TeamSheetPosition` (read-only) | — | **Fixed 2026-09-09**: previously had a full duplicate live-recording engine (Kick Off/Goal/Card/Sub/Full-Time) on a public, unauthenticated route — removed entirely. Now purely a read-only scoreboard/timeline/stats/MOTM-vote/photos view |
-| Facebook posting | `postToFacebook` function | Real, connected Graph API (page: "Grindon Broadway 040s") | — | Working |
+| Facebook posting | `postToFacebook` function | Graph API (page: "Grindon Broadway 040s") | — | **Broken 2026-10-06** — `facebook_pages` connector expired, needs Paul to reconnect in Base44 Integrations settings. See Known Issues #35. |
 | Weather | `fetchFixtureWeather` | Real, free Open-Meteo API | — | Working |
 
 ## Match report dictation workflow (in progress, 2026-09-09)

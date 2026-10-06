@@ -337,3 +337,11 @@ Paul confirmed: (1) pitch fencing does have room for the ~50 extra banners being
 - Created `UCS Technologies` (`6ac49f386632f064eb0fbc5d`) — new record, `sponsorship_type: "pitch"`, contact details (0845 901 1144, info@ucs-technologies.com) taken directly from their own paid banner, not guessed. No logo yet — the banner graphic combines both UCS brands, would need cropping/splitting if a separate logo is wanted later.
 
 Public sponsor pages will now show GKB and UCS Technologies in both their kit/banner sections correctly, instead of only one role each.
+
+## 2026-10-06 (continued) — Facebook outreach attempts: confirmed `facebook.com` is unreachable, added 5 more prospects to `SponsorLead`
+
+Paul tried using the app's "Facebook" button (Matchday Graphics Studio → `postToFacebook`) and it failed. Root cause confirmed via `mcp__Base44__list_connectors`: the `facebook_pages` connector is `connected: true` but `status: "expired"` — logged as Known Issues #35, needs Paul to manually reconnect in Base44's Integrations settings.
+
+Paul separately asked for two more Facebook-dependent things, both blocked by the same root cause (`facebook.com` is blocked by this environment's network egress proxy, confirmed via a direct `WebFetch` attempt on the Ad Library earlier): browsing local "Have Your Say"/selling Facebook groups to find businesses posting ads there, and sending Messenger contact to prospects directly. Neither is possible from this session — no browser/login tool reaches Facebook at all here. Explained the limitation plainly rather than attempting an unreliable workaround.
+
+Kept building the `SponsorLead` pipeline via the channel that does work (Yell.com-scoped search): added 5 more verified local prospects — The Jolly Fryer (fish & chip shop), Sure Vehicle Centre (car garage/MOT), Otax Ltd (accountant), Signs Express Wearside (signage/print — good synergy, they make banners themselves), Pennywell Honto Shin Karate Club. Skipped national chains found in the same searches (Halfords Autocentre) and two results with a suspicious duplicate phone number across different business names (Smith's Garage / Sunderland MOT Centre) rather than risk bad contact data. `SponsorLead` total now 20 of the ~50 target, none contacted yet.

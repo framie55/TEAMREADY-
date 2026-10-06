@@ -297,3 +297,19 @@ Also noted in passing: `PublicWebLayout.jsx`'s header structure has changed sinc
 
 **Tested:** `npm run build` clean; `eslint` clean on both changed files (pre-existing unrelated warnings in `Login.jsx` untouched).
 **Checkpoint:** `6aa033e72f59ef94088153e6`.
+
+## 2026-10-06 — Reconciled `Sponsor.sponsorship_type` against Paul's real pitchside banner sheet; added missing banner sponsors
+
+Paul sent the club's actual banner order sheet (48 sold, 2 spaces left) to ask about a daily Facebook sponsor-spotlight post. Cross-checked it against all 36 existing `Sponsor` records — only 3 were correctly tagged `sponsorship_type: "pitch"` (FNF Method, DKJ Joinery, David Graham Roofing); most banner sponsors were sitting under the generic `"general"` type from an earlier bulk import. This is a data correction, not a code change — no build/checkpoint needed, logged here for continuity.
+
+**Data changes (via `mcp__Base44__update_entities` / `create_entities`, verified against Paul's sheet, not guessed):**
+- Retagged 21 existing sponsors from `general` → `pitch`: GM Sports Therapy, DMG Power Systems Ltd, Heritage Drives, Paul Pybus Scaffolding Ltd, DPS Northern Building & Maintenance, Sycamore Care Centre, Bolton and Hughes Cabinetry, Kitchens plus Bathrooms, Pennine Windows | Doors | Living Spaces, NE Oven Cleaning and Repairs, FASTFIX Building Maintenance Ltd, Brian Scales Roofing Contractor, O'Brien Architectural Salvage, Asset Survey Solutions, ABS Cleaning Service, Fairweather Joinery Ltd, D&G Minibus & Van Hire, Burton Roofing Merchants — Sunderland, Instadec Ltd Painting Services, Instaflor Ltd Flooring Services, Heritage Windows NE.
+- Created 11 sponsors that had a banner on Paul's sheet but no `Sponsor` record at all: Jason Wilson Roofing, Michael Coghlan Football Coaching, Wearside Plumbing Supplies Ltd, MES Construction, TAG Roofing & Property Maintenance Ltd, Peacock Tyre Company Ltd, Surface Solutions NE, Scrimger Roofing, DB Motors Ltd, Franky's Flooring, The Steadfast Security Group. All `active: true`, `sponsorship_type: "pitch"`, phone numbers transcribed from banner images where legible (flagged to Paul to verify) — none have a `logo_url` yet.
+
+**Flagged to Paul, not resolved unilaterally (schema only supports one `sponsorship_type` per sponsor, so these are genuinely ambiguous, not something to guess):**
+- `SafeSwitch Solutions` — the sheet shows Paul's own business with x2 banners, but the matching DB record was previously marked `"DUPLICATE - hidden by Claude 09/09, safe to delete in-app"` and set inactive. That label may have been wrong — it's possibly a real second sponsorship role (banner), distinct from the active "covers programme/printing costs" record of the same name. Needs Paul's call before touching.
+- `GKB Financial Planning` (currently `kit`) and `UCS Technologies / Renewables` (currently `kit`, as `UCS Renewables`) both also have x2 banners on the sheet — left their `sponsorship_type` as `kit` rather than overwriting it, since the schema can't represent "both".
+- `Board Inn` — sheet lists a banner; DB already has a distinct, correctly-active `Board Inn East Herrington` (`sponsorship_type: "main_club"`) — left as is, looks like the better category already.
+- "Cooke on Gas removed from current sold list" per the sheet's own footnote — not present in the DB at all, so no action needed.
+
+**Not done yet:** logos for the 11 new sponsors (need real images from Paul or his banner photos), and the daily Facebook sponsor-spotlight feature itself (review-first, one-tap post via the existing `postToFacebook` function) — next up once Paul confirms the flagged items above.

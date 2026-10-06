@@ -365,3 +365,7 @@ Paul confirmed: leave pubs out entirely (Board Inn East Herrington stays the clu
 ## 2026-10-06 (continued) — 4 more SponsorLead prospects
 
 Added 4 more correctly-located prospects: Victoria Nail & Beauty (Houghton-le-Spring), Diamond Ink Tattoo & Piercing Studio (Shiney Row), A2B Removals, HQ Furnishings (Silksworth). `SponsorLead` total now 37 of the ~50 target, none contacted yet.
+
+## 2026-10-06 (continued) — 3 more SponsorLead prospects; running low on distinct new categories in this catchment
+
+Added 3 more: Sunderland Locksmith Services, Stoneygate Stables Kennels & Cattery, Mobile Chiropodist James R Wilson (all SR3/Houghton-le-Spring). `SponsorLead` total now 40 of the ~50 target, none contacted yet. Getting harder to find further distinct, verifiable independent businesses strictly within the named catchment (East/Middle Herrington, Farringdon, Silksworth, Shiney Row, Houghton-le-Spring, Grindon) without either repeating a category already covered or reaching into adjacent postcodes (e.g. DH5/Hetton-le-Hole) Paul didn't name — flagged to Paul rather than quietly widening the search area.
